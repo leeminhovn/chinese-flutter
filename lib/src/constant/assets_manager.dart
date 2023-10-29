@@ -37,22 +37,17 @@ class IconsManager {
   String get flash_card_click => '${_prefix}flash_card_click.png';
   String get ic_correct_status => '${_prefix}ic_correct_status.svg';
   String get ic_incorrect_status => '${_prefix}ic_incorrect_status.svg';
-  String get ic_notebook_tab => '${_prefix}ic_notebook_tab.png';
-  String get ic_review_learn_vocabulary =>
-      '${_prefix}ic_review_learn-vocabulary.png';
-  String get ic_silver_close => '${_prefix}ic_silver_close.svg';
-  String get ic_vocab_tab => '${_prefix}ic_vocab_tab.png';
-  String get icon_arrow_left_circle => '${_prefix}icon_arrow_left_circle.svg';
-  String get icon_arrow_right_circle => '${_prefix}icon_arrow_right_circle.svg';
-  String get icon_bookcase => '${_prefix}icon_bookcase.svg';
-  String get icon_fire_clock => '${_prefix}icon_fire_clock.png';
-  String get icon_graduation => '${_prefix}icon_graduation.svg';
-  String get icon_graph_black => '${_prefix}icon_graph_black.svg';
-  String get icon_notebook_black => '${_prefix}icon_notebook_black.svg';
-  String get icon_notebook => '${_prefix}icon_notebook.png';
+
   String get icon_target => '${_prefix}icon_target.svg';
-  String get icon_vocab_black => '${_prefix}icon_vocab_black.svg';
-  String get icon_vocab => '${_prefix}icon_vocab.png';
+
+  String get icon_graph => '${_prefix}icon_graph.svg';
+  String get icon_gire_clock => '${_prefix}icon_gire_clock.svg';
+
+  String get ic_notebook_tab => '${_prefix}ic_notebook_tab.png';
+  String get icon_graph_black => '${_prefix}icon_graph_black.png';
+  String get icon_notebook_black => '${_prefix}icon_notebook_black.png';
+  String get icon_vocab_black => '${_prefix}icon_vocab_black.png';
+  String get icon_vocab_tab => '${_prefix}ic_vocab_tab.png';
   String get michi => '${_prefix}michi.png';
   String get speaker_audio => '${_prefix}speaker_audio.png';
   String get wave1 => '${_prefix}wave1.png';
