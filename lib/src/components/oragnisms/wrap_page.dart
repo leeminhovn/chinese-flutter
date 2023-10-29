@@ -161,9 +161,19 @@ class _ItemBottomBar extends State<ItemBottomBar> {
           SizedBox(
             height: 3,
           ),
-          Text(
-            widget.namePage,
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 600),
+            transform: Matrix4.translationValues(0, isActive ? -2 : 0, 0),
+            child: AnimatedDefaultTextStyle(
+              duration: Duration(milliseconds: 600),
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
+                  fontSize: isActive ? 16 : 13),
+              child: Text(
+                widget.namePage,
+              ),
+            ),
           ),
           SizedBox(
             height: 6,
