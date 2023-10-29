@@ -32,6 +32,7 @@ class _WrapPage extends State<WrapPage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      backgroundColor: Colors.transparent,
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(color: Colors.white, boxShadow: [
           BoxShadow(
@@ -127,22 +128,34 @@ class _ItemBottomBar extends State<ItemBottomBar> {
     super.initState();
   }
 
+  handleRedirect() {
+    final String currentPage = GoRouterState.of(context).uri.toString();
+    // TODO: implement build
+    final bool canRedirect = currentPage != widget.pageRedirect;
+    if (canRedirect) {
+      context.go(widget.pageRedirect);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final String currentPage = GoRouterState.of(context).uri.toString();
     // TODO: implement build
     final bool isActive = currentPage == widget.pageRedirect;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        isActive
-            ? returnImage(widget.activeIcon)
-            : returnImage(widget.inActiveIcon),
-        SizedBox(
-          height: 3,
-        ),
-        Text(widget.namePage)
-      ],
+    return InkWell(
+      onTap: handleRedirect,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          isActive
+              ? returnImage(widget.activeIcon)
+              : returnImage(widget.inActiveIcon),
+          SizedBox(
+            height: 3,
+          ),
+          Text(widget.namePage)
+        ],
+      ),
     );
   }
 
