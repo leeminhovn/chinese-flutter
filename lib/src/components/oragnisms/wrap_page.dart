@@ -155,15 +155,19 @@ class _ItemBottomBar extends State<ItemBottomBar> {
               return ScaleTransition(scale: animation, child: child);
             },
             child: isActive
-                ? returnImage(widget.activeIcon)
-                : SizedBox(
-                    // key: ValueKey(widget.pageRedirect),
-                    child: returnImage(widget.inActiveIcon)),
+                ? WrapAnimationBottomBar(returnImage(widget.activeIcon))
+                : returnImage(widget.inActiveIcon),
           ),
           SizedBox(
             height: 3,
           ),
-          Text(widget.namePage)
+          Text(
+            widget.namePage,
+            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
+          ),
+          SizedBox(
+            height: 6,
+          ),
         ],
       ),
     );
@@ -178,6 +182,53 @@ class _ItemBottomBar extends State<ItemBottomBar> {
           pathImage,
           height: 30,
         );
+}
+
+class WrapAnimationBottomBar extends StatefulWidget {
+  final Widget child;
+
+  WrapAnimationBottomBar(this.child, {super.key});
+  @override
+  State<StatefulWidget> createState() => _WrapAnimationBottomBar();
+}
+
+class _WrapAnimationBottomBar extends State<WrapAnimationBottomBar>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+    duration: const Duration(milliseconds: 300),
+    vsync: this,
+  );
+
+  late final Animation<Offset> _offsetAnimation = Tween<Offset>(
+    begin: Offset.zero,
+    end: const Offset(0.0, -0.3),
+  ).animate(CurvedAnimation(
+    parent: _controller,
+    curve: Curves.linear,
+  ));
+
+  late final Animation<double> _scaleAnimation =
+      Tween<double>(begin: 1, end: 1.4).animate(_controller);
+
+  @override
+  void initState() {
+    Future.delayed(Duration(milliseconds: 200), () => {_controller.forward()});
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SlideTransition(
+      position: _offsetAnimation,
+      child: ScaleTransition(scale: _scaleAnimation, child: widget.child),
+    );
+  }
 }
 
 class ImageUser extends StatefulWidget {
