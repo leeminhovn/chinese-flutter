@@ -142,14 +142,24 @@ class _ItemBottomBar extends State<ItemBottomBar> {
     final String currentPage = GoRouterState.of(context).uri.toString();
     // TODO: implement build
     final bool isActive = currentPage == widget.pageRedirect;
-    return InkWell(
+    return GestureDetector(
       onTap: handleRedirect,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          isActive
-              ? returnImage(widget.activeIcon)
-              : returnImage(widget.inActiveIcon),
+          AnimatedSwitcher(
+            duration: Duration(milliseconds: 400),
+            // transitionBuilder: (Widget child, Animation<double> animation) =>
+            //     ScaleTransition(scale: animation),
+            transitionBuilder: (Widget child, Animation<double> animation) {
+              return ScaleTransition(scale: animation, child: child);
+            },
+            child: isActive
+                ? returnImage(widget.activeIcon)
+                : SizedBox(
+                    // key: ValueKey(widget.pageRedirect),
+                    child: returnImage(widget.inActiveIcon)),
+          ),
           SizedBox(
             height: 3,
           ),

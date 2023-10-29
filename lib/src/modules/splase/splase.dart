@@ -1,4 +1,6 @@
+import 'package:MochiChinese/config/router_name.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../components/oragnisms/mochi_version.dart';
@@ -12,6 +14,13 @@ class Splase extends StatefulWidget {
 }
 
 class _Splase extends State<Splase> {
+  @override
+  void initState() {
+    Future.delayed(Duration(seconds: 4),
+        () => GoRouter.of(context).go(ApplicationRouteName.home));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(

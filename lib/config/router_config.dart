@@ -12,7 +12,7 @@ final GlobalKey<NavigatorState> _shellNavigatorKey =
     GlobalKey<NavigatorState>();
 
 final GoRouter routerConfig =
-    GoRouter(initialLocation: ApplicationRouteName.home, routes: <RouteBase>[
+    GoRouter(initialLocation: ApplicationRouteName.splash, routes: <RouteBase>[
   GoRoute(
       path: ApplicationRouteName.splash,
       name: ApplicationRouteName.splash,
