@@ -167,9 +167,9 @@ class _ItemBottomBar extends State<ItemBottomBar> {
             child: AnimatedDefaultTextStyle(
               duration: Duration(milliseconds: 600),
               style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
-                  fontSize: isActive ? 16 : 13),
+                  color: Color(0xff212529),
+                  fontWeight: isActive ? FontWeight.w400 : FontWeight.w300,
+                  fontSize: 15),
               child: Text(
                 widget.namePage,
               ),
