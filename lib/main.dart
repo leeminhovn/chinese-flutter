@@ -1,5 +1,7 @@
 import 'package:MochiChinese/config/router_config.dart';
+import 'package:MochiChinese/src/modules/learn/bloc/courses_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,10 +19,12 @@ class MyApp extends StatefulWidget {
 class _MyApp extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: "Quicksand"),
-      routerConfig: routerConfig,
-    );
+    return MultiBlocProvider(
+        providers: [BlocProvider(create: (ctx) => CoursesCubit())],
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(fontFamily: "Quicksand"),
+          routerConfig: routerConfig,
+        ));
   }
 }

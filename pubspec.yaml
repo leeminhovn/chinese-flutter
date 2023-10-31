@@ -22,7 +22,7 @@ version: 1.0.0+1
 
 environment:
     sdk: ">=3.1.0 <4.0.0"
-
+#    flutter packages pub run build_runner build --delete-conflicting-outputs
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
 # consider running `flutter pub upgrade --major-versions`. Alternatively,
@@ -41,6 +41,7 @@ dependencies:
     lottie: ^2.7.0
     dio: ^5.3.3
     flutter_svg: ^2.0.8
+    flutter_bloc: ^8.1.3
 
 dev_dependencies:
     flutter_test:
@@ -52,6 +53,8 @@ dev_dependencies:
     # package. See that file for information about deactivating specific lint
     # rules and activating additional ones.
     flutter_lints: ^2.0.0
+    json_serializable: ^6.7.1
+    build_runner: ^2.4.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -98,6 +101,10 @@ flutter:
               - asset: assets/fonts/Quicksand-SemiBold.ttf
                 weight: 600
               - asset: assets/fonts/Quicksand-Bold.ttf
+                weight: 700
+        - family: RifficFree
+          fonts:
+              - asset: assets/fonts/RifficFree-Bold.ttf
                 weight: 700
 
     # For details regarding fonts from package dependencies,

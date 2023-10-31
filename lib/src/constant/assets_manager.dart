@@ -5,6 +5,7 @@ class AssetsManager {
   static ImagesManager get images => ImagesManager();
   static IconsManager get icons => IconsManager();
   static AnimationsManager get animations => AnimationsManager();
+  static MochiManager get mochi => MochiManager();
   static AudiosManager get audios => AudiosManager();
   static BannersManager get banners => BannersManager();
 }
@@ -37,7 +38,7 @@ class IconsManager {
   String get flash_card_click => '${_prefix}flash_card_click.png';
   String get ic_correct_status => '${_prefix}ic_correct_status.svg';
   String get ic_incorrect_status => '${_prefix}ic_incorrect_status.svg';
-
+  String get ic_white_arrow_down => '${_prefix}ic_white_arrow_down.svg';
   String get icon_target => '${_prefix}icon_target.svg';
 
   String get icon_graph => '${_prefix}icon_graph.svg';
@@ -53,6 +54,22 @@ class IconsManager {
   String get wave1 => '${_prefix}wave1.png';
   String get wave2 => '${_prefix}wave2.png';
   String get wave3 => '${_prefix}wave3.png';
+}
+
+class MochiManager {
+  static const String _prefix = "assets/images/mochi/";
+  String get mochi_chong_gay => '${_prefix}mochi_chong_gay.png';
+  String get Mochi_cry => '${_prefix}Mochi_cry.png';
+  String get mochi_hi => '${_prefix}mochi_hi.png';
+  String get mochi_isau_door => '${_prefix}mochi_isau_door.png';
+  String get mochi_meo => '${_prefix}mochi_meo.png';
+  String get mochi_ngai_ngung => '${_prefix}mochi_ngai_ngung.png';
+  String get mochi_niu_keo => '${_prefix}mochi_niu_keo.png';
+  String get mochi_notice => '${_prefix}mochi_notice.png';
+  String get mochi_study_happy => '${_prefix}mochi_study_happy.png';
+  String get mochi_submit_fail => '${_prefix}mochi_submit_fail.svg';
+  String get mochiSayEnding => '${_prefix}mochiSayEnding.png';
+  String get success => '${_prefix}success.png';
 }
 
 class AnimationsManager {

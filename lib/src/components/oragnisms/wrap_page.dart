@@ -20,7 +20,7 @@ final List<InfoItemBar> dataBottomSheet = [
 ];
 
 class WrapPage extends StatefulWidget {
-  final Widget child;
+  final StatefulNavigationShell child;
   const WrapPage(this.child, {super.key});
 
   @override
