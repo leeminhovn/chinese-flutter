@@ -4,8 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import '../../../constant/assets_manager.dart';
 
 class ListLessonTopTitle extends StatelessWidget {
-  const ListLessonTopTitle({super.key});
-
+  final String title;
+  const ListLessonTopTitle({this.title = "", super.key});
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -31,9 +31,9 @@ class ListLessonTopTitle extends StatelessWidget {
             child: Stack(
               alignment: Alignment.center,
               children: [
-                const Text(
-                  "100 basic Chinese vocabulary",
-                  style: TextStyle(
+                Text(
+                  title,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 22,
                     height: 1,

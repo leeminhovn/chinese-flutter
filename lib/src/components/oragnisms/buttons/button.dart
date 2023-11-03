@@ -75,30 +75,25 @@ class _Button extends State<Button> {
             color: buttonStyle.footerColor,
             border: Border.all(width: 5, color: const Color(0xfffff8f3)),
           ),
-          child: Stack(
-            children: [
-              Container(
-                width: double.infinity,
-                height: double.infinity,
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: buttonStyle.middleColor,
-                    ),
-                    borderRadius: BorderRadius.circular(12),
-                    color: buttonStyle.topColor),
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    widget.text,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                        fontFamily: "RifficFree",
-                        fontSize: 20),
-                  ),
-                ),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: buttonStyle.middleColor,
               ),
-            ],
+              borderRadius: BorderRadius.circular(12),
+              color: buttonStyle.topColor,
+            ),
+            child: Align(
+              alignment: Alignment.center,
+              child: Text(
+                widget.text,
+                style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                    fontFamily: "RifficFree",
+                    fontSize: 20),
+              ),
+            ),
           ),
         ),
       ),

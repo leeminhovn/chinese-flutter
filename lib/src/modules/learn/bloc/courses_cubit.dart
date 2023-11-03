@@ -10,7 +10,6 @@ part 'courses_state.dart';
 class CoursesCubit extends Cubit<CoursesState> {
   CoursesCubit() : super(CoursesInitial()) {
     initalFirstCourseAndLesson();
-    print("zppp");
   }
 
   void initalFirstCourseAndLesson() async {
@@ -20,7 +19,21 @@ class CoursesCubit extends Cubit<CoursesState> {
       CoursesRepo()
           .getLessonsOfCourse({"courseId": LearnConstants.defaultIdCourse})
     ]);
-    print("result");
-    emit(LessonsDoneLoading(state));
+    final List<CourseDto> listCourse = result[0];
+    emit(LessonsDoneLoading(state)
+      ..listCourse = listCourse
+      ..currentCourse = listCourse
+          .firstWhere((course) => course.id == LearnConstants.defaultIdCourse)
+      ..lessons = [
+        StateLessonOfCourse(LearnConstants.defaultIdCourse, result[1])
+      ]
+      ..currentLessons = result[1]);
   }
+}
+
+class StateLessonOfCourse {
+  final String courseId;
+  final List<LessonDto> lessons;
+
+  StateLessonOfCourse(this.courseId, this.lessons);
 }

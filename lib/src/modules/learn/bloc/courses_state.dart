@@ -7,25 +7,21 @@
 
 part of 'courses_cubit.dart';
 
-class StateLessonOfCourse {
-  final String courseId;
-  final List<LessonDto> lessons;
-
-  StateLessonOfCourse(this.courseId, this.lessons);
-}
-
 abstract class CoursesState {
   bool isLoadingLessons = false;
   List<CourseDto> listCourse = [];
   List<StateLessonOfCourse> lessons = [];
-  LessonDto? curentLesson;
+
+  LessonDto? currentLesson;
+  List<LessonDto> currentLessons = [];
   CourseDto? currentCourse;
 
   copy(CoursesState state) {
     isLoadingLessons = state.isLoadingLessons;
     listCourse = state.listCourse;
     lessons = state.lessons;
-    curentLesson = state.curentLesson;
+    currentLessons = state.currentLessons;
+    currentLesson = state.currentLesson;
     currentCourse = state.currentCourse;
   }
 }

@@ -27,6 +27,7 @@ class ScreenNotHaveWordLearn extends StatelessWidget {
         ),
         Button(
           "LEARN NEW WORDS",
+          height: 65,
           funcClick: () {
             print('hahah');
           },
@@ -48,7 +49,7 @@ class ScreenNotHaveWordLearn extends StatelessWidget {
   Widget _text01() => const Text.rich(
         TextSpan(
             style: TextStyle(
-              fontSize: 25,
+              fontSize: 22,
               fontWeight: FontWeight.w700,
             ),
             children: [

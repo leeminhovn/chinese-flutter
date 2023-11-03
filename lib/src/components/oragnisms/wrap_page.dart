@@ -148,7 +148,7 @@ class _ItemBottomBar extends State<ItemBottomBar> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           AnimatedSwitcher(
-            duration: Duration(milliseconds: 400),
+            duration: const Duration(milliseconds: 200),
             // transitionBuilder: (Widget child, Animation<double> animation) =>
             //     ScaleTransition(scale: animation),
             transitionBuilder: (Widget child, Animation<double> animation) {
@@ -158,16 +158,16 @@ class _ItemBottomBar extends State<ItemBottomBar> {
                 ? WrapAnimationBottomBar(returnImage(widget.activeIcon))
                 : returnImage(widget.inActiveIcon),
           ),
-          SizedBox(
+          const SizedBox(
             height: 3,
           ),
           AnimatedContainer(
-            duration: const Duration(milliseconds: 600),
+            duration: const Duration(milliseconds: 300),
             transform: Matrix4.translationValues(0, isActive ? -2 : 0, 0),
             child: AnimatedDefaultTextStyle(
-              duration: Duration(milliseconds: 600),
+              duration: const Duration(milliseconds: 300),
               style: TextStyle(
-                  color: Color(0xff212529),
+                  color: const Color(0xff212529),
                   fontWeight: isActive ? FontWeight.w400 : FontWeight.w300,
                   fontSize: 15),
               child: Text(
@@ -175,7 +175,7 @@ class _ItemBottomBar extends State<ItemBottomBar> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 6,
           ),
         ],
@@ -222,7 +222,8 @@ class _WrapAnimationBottomBar extends State<WrapAnimationBottomBar>
 
   @override
   void initState() {
-    Future.delayed(Duration(milliseconds: 200), () => {_controller.forward()});
+    Future.delayed(
+        const Duration(milliseconds: 100), () => {_controller.forward()});
     super.initState();
   }
 
