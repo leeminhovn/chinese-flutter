@@ -7,8 +7,14 @@ class ListLessonTopTitle extends StatelessWidget {
   final String title;
   final bool isShowIconDown;
   final Function? click;
+  final int type;
+  // type =1 , have data
   const ListLessonTopTitle(
-      {this.title = "", this.click, required this.isShowIconDown, super.key});
+      {this.title = "",
+      this.click,
+      required this.isShowIconDown,
+      this.type = 1,
+      super.key});
 
   _handleClick(e) {
     if (click != null && title != '') {
@@ -31,12 +37,18 @@ class ListLessonTopTitle extends StatelessWidget {
             child: Container(
               constraints: const BoxConstraints(minHeight: 56),
               decoration: BoxDecoration(
-                  color: const Color(0xfffb993b),
+                  color: type == 1 ? const Color(0xfffb993b) : null,
+                  gradient: type == 1
+                      ? null
+                      : const LinearGradient(
+                          colors: [Color(0xffe5e5e5), Color(0xffcbcbcb)]),
                   borderRadius: BorderRadius.circular(18),
-                  boxShadow: const <BoxShadow>[
+                  boxShadow: <BoxShadow>[
                     BoxShadow(
-                        color: Color.fromRGBO(255, 150, 0, 0.25),
-                        offset: Offset(4, 6),
+                        color: type == 1
+                            ? const Color.fromRGBO(255, 150, 0, 0.25)
+                            : const Color.fromRGBO(0, 0, 0, 0.15),
+                        offset: const Offset(4, 6),
                         blurRadius: 10)
                   ]),
               padding: const EdgeInsets.only(left: 10, right: 10),
@@ -87,7 +99,8 @@ class ListLessonTopTitle extends StatelessWidget {
         width: 50,
         child: Container(
           decoration: BoxDecoration(
-              color: const Color(0xfffde3c5),
+              color:
+                  type == 1 ? const Color(0xfffde3c5) : const Color(0xffcbcbcb),
               borderRadius: BorderRadius.only(
                   topLeft: leftRadisu,
                   bottomLeft: leftRadisu,

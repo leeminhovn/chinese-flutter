@@ -4,8 +4,8 @@ import 'package:MochiChinese/src/modules/learn/widgets/list_lesson_top_title.dar
 import 'package:flutter/material.dart';
 
 class CardCourse extends StatefulWidget {
-  final CourseDto coruseData;
-  const CardCourse({required this.coruseData, super.key});
+  final CourseDto courseData;
+  const CardCourse({required this.courseData, super.key});
 
   @override
   State<StatefulWidget> createState() => _CardCourse();
@@ -35,15 +35,15 @@ class _CardCourse extends State<CardCourse> {
           width: width,
           fit: BoxFit.fill,
         ),
-        SizedBox(
+        const SizedBox(
           width: 15,
         ),
         Expanded(
           child: Text(
             text,
-            style: TextStyle(
+            style: const TextStyle(
                 color: Color.fromRGBO(99, 94, 95, 0.8),
-                fontSize: 18,
+                fontSize: 19,
                 fontWeight: FontWeight.w600),
           ),
         )
@@ -63,7 +63,7 @@ class _CardCourse extends State<CardCourse> {
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
+            borderRadius: BorderRadius.circular(40),
             color: Colors.white,
             border: Border.all(color: const Color(0xffffcb08), width: 2),
             boxShadow: [
@@ -81,19 +81,20 @@ class _CardCourse extends State<CardCourse> {
             child: Column(
               children: [
                 ListLessonTopTitle(
-                  title: widget.coruseData.title,
+                  title: widget.courseData.title,
                   isShowIconDown: false,
+                  type: widget.courseData.isData ? 1 : 0,
                 ),
-                SizedBox(
-                  height: 20,
+                const SizedBox(
+                  height: 30,
                 ),
                 _rowInfo(AssetsManager.icons.icon_target,
-                    widget.coruseData.outcome, 50),
-                SizedBox(
+                    widget.courseData.outcome, 40),
+                const SizedBox(
                   height: 10,
                 ),
                 _rowInfo(AssetsManager.icons.icon_vocab_tab,
-                    widget.coruseData.description, 50)
+                    widget.courseData.description, 40)
               ],
             ),
           ),

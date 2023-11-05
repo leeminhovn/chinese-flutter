@@ -61,7 +61,7 @@ class _ListCourse extends State<ListCourse> {
             duration: const Duration(milliseconds: 400),
             child: Column(
               children: [
-                ...dataCourses.map((course) => CardCourse(coruseData: course))
+                ...dataCourses.map((course) => CardCourse(courseData: course))
               ],
             ),
           ),
