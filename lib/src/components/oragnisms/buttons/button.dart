@@ -32,6 +32,14 @@ class _Button extends State<Button> {
               Color(0xfffa8c3f),
             ],
             footerColor: const Color(0xfff95c08));
+      } else if (widget.color == "green") {
+        buttonStyle = StyleButton(
+            topColor: const Color(0xff25a930),
+            middleColor: const [
+              Color(0xff59f672),
+              Color(0xff4dd563),
+            ],
+            footerColor: const Color(0xff25a930));
       }
     });
     super.initState();
@@ -57,7 +65,7 @@ class _Button extends State<Button> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(22),
           boxShadow: [
             BoxShadow(
                 offset: const Offset(2, 3),
@@ -71,7 +79,7 @@ class _Button extends State<Button> {
           height: widget.height,
           padding: const EdgeInsets.only(bottom: 5.6, right: 3),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(22),
             color: buttonStyle.footerColor,
             border: Border.all(width: 5, color: const Color(0xfffff8f3)),
           ),
@@ -80,7 +88,7 @@ class _Button extends State<Button> {
               gradient: LinearGradient(
                 colors: buttonStyle.middleColor,
               ),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(15),
               color: buttonStyle.topColor,
             ),
             child: Align(
@@ -91,7 +99,7 @@ class _Button extends State<Button> {
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
                     fontFamily: "RifficFree",
-                    fontSize: 20),
+                    fontSize: 17),
               ),
             ),
           ),

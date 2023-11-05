@@ -42,7 +42,7 @@ class IconsManager {
   String get ic_correct_status => '${_prefix}ic_correct_status.svg';
   String get ic_incorrect_status => '${_prefix}ic_incorrect_status.svg';
   String get ic_white_arrow_down => '${_prefix}ic_white_arrow_down.svg';
-  String get icon_target => '${_prefix}icon_target.svg';
+  String get icon_target => '${_prefix}icon_target.png';
 
   String get icon_graph => '${_prefix}icon_graph.svg';
   String get icon_gire_clock => '${_prefix}icon_gire_clock.svg';

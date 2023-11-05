@@ -17,7 +17,7 @@ class WrapPopupPage extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      color: const Color(0xfffff3e4),
+      color: Colors.white,
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.transparent,
@@ -27,8 +27,24 @@ class WrapPopupPage extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 10),
                 decoration: const BoxDecoration(color: Color(0xffffcb08)),
                 height: 65,
-                child: Row(
-                  children: [CircleBackButton(backPage: backPage)],
+                child: Stack(
+                  children: [
+                    Align(
+                        alignment: Alignment.centerLeft,
+                        child: CircleBackButton(backPage: backPage)),
+                    SizedBox(
+                      width: double.infinity,
+                      child: Center(
+                        child: Text(
+                          title,
+                          style: const TextStyle(
+                            fontSize: 23,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
               Expanded(child: child)

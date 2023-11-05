@@ -2,6 +2,7 @@ import 'package:MochiChinese/config/router_name.dart';
 import 'package:MochiChinese/src/components/oragnisms/wrap_page.dart';
 import 'package:MochiChinese/src/modules/home/home.dart';
 import 'package:MochiChinese/src/modules/learn/learn.dart';
+import 'package:MochiChinese/src/modules/learn/screens/list_course.dart';
 import 'package:MochiChinese/src/modules/notebook/notebook.dart';
 import 'package:MochiChinese/src/modules/profile/profile.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,12 @@ final GoRouter routerConfig =
         return Profile(
           redirectFrom: argument["redirectFrom"],
         );
+      }),
+  GoRoute(
+      path: ApplicationRouteName.list_course,
+      name: ApplicationRouteName.list_course,
+      builder: (BuildContext context, GoRouterState state) {
+        return ListCourse();
       }),
   StatefulShellRoute.indexedStack(
       branches: <StatefulShellBranch>[

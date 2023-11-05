@@ -1,6 +1,8 @@
+import 'package:MochiChinese/config/router_name.dart';
 import 'package:MochiChinese/src/components/oragnisms/buttons/button.dart';
 import 'package:MochiChinese/src/constant/assets_manager.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:go_router/go_router.dart';
 
 class ScreenNotHaveWordNoteBook extends StatefulWidget {
   @override
@@ -33,7 +35,9 @@ class _ScreenNotHaveWordNoteBook extends State<ScreenNotHaveWordNoteBook> {
           SizedBox(
             height: 20,
           ),
-          Button("LEARN NEW WORDS", height: 65, funcClick: () {}),
+          Button("LEARN NEW WORDS", height: 65, funcClick: () {
+            context.go(ApplicationRouteName.learn);
+          }),
         ],
       ),
     );

@@ -19,6 +19,12 @@ class MyApp extends StatefulWidget {
 
 class _MyApp extends State<MyApp> {
   @override
+  void dispose() {
+    print("dispose main");
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [BlocProvider(create: (ctx) => CoursesCubit())],

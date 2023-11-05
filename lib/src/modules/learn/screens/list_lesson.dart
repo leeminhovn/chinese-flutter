@@ -1,9 +1,11 @@
+import 'package:MochiChinese/config/router_name.dart';
 import 'package:MochiChinese/src/components/oragnisms/card_lesson.dart';
 import 'package:MochiChinese/src/constant/app_constants.dart';
 import 'package:MochiChinese/src/modules/learn/bloc/courses_cubit.dart';
 import 'package:MochiChinese/src/modules/learn/widgets/list_lesson_top_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../data/dtos/courses/info_lesson_course.dart';
 
@@ -15,6 +17,10 @@ class ListLesson extends StatefulWidget {
 }
 
 class _ListLesson extends State<ListLesson> {
+  _handleClickTitleCourse() {
+    context.go((ApplicationRouteName.list_course));
+  }
+
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
@@ -35,7 +41,11 @@ class _ListLesson extends State<ListLesson> {
           state is LessonsLoading ? "" : state.currentCourse!.title;
       return Column(
         children: [
-          ListLessonTopTitle(title: titleCourse),
+          ListLessonTopTitle(
+            title: titleCourse,
+            isShowIconDown: true,
+            click: _handleClickTitleCourse,
+          ),
           const SizedBox(
             height: 10,
           ),
@@ -68,14 +78,14 @@ class _ListLesson extends State<ListLesson> {
                         description: data.description,
                       );
                     case 1:
-                      return CardLockLesson(
+                      return CardUnLockLesson(
                           title: data.title,
-                          funcClick: handleClickLockLesson,
+                          funcClick: handleClickOpenLesson,
                           description: data.description);
                     case 2:
                       return CardLearnedLesson(
                         title: data.title,
-                        funcClick: handleClickLockLesson,
+                        funcClick: handleCLickLearnedLesson,
                         description: data.description,
                       );
                   }

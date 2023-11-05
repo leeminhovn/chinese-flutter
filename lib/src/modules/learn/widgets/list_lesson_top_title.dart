@@ -5,7 +5,17 @@ import '../../../constant/assets_manager.dart';
 
 class ListLessonTopTitle extends StatelessWidget {
   final String title;
-  const ListLessonTopTitle({this.title = "", super.key});
+  final bool isShowIconDown;
+  final Function? click;
+  const ListLessonTopTitle(
+      {this.title = "", this.click, required this.isShowIconDown, super.key});
+
+  _handleClick(e) {
+    if (click != null && title != '') {
+      click!();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -16,42 +26,46 @@ class ListLessonTopTitle extends StatelessWidget {
         _bothContai("right"),
         FractionallySizedBox(
           widthFactor: 0.8,
-          child: Container(
-            constraints: const BoxConstraints(minHeight: 56),
-            decoration: BoxDecoration(
-                color: const Color(0xfffb993b),
-                borderRadius: BorderRadius.circular(18),
-                boxShadow: const <BoxShadow>[
-                  BoxShadow(
-                      color: Color.fromRGBO(255, 150, 0, 0.25),
-                      offset: Offset(4, 6),
-                      blurRadius: 10)
-                ]),
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    height: 1,
-                    letterSpacing: 1,
-                    fontFamily: "RifficFree",
-                    fontWeight: FontWeight.w700,
+          child: GestureDetector(
+            onTapDown: _handleClick,
+            child: Container(
+              constraints: const BoxConstraints(minHeight: 56),
+              decoration: BoxDecoration(
+                  color: const Color(0xfffb993b),
+                  borderRadius: BorderRadius.circular(18),
+                  boxShadow: const <BoxShadow>[
+                    BoxShadow(
+                        color: Color.fromRGBO(255, 150, 0, 0.25),
+                        offset: Offset(4, 6),
+                        blurRadius: 10)
+                  ]),
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      height: 1,
+                      letterSpacing: 1,
+                      fontFamily: "RifficFree",
+                      fontWeight: FontWeight.w700,
+                    ),
+                    textAlign: TextAlign.center,
+                    softWrap: true,
                   ),
-                  textAlign: TextAlign.center,
-                  softWrap: true,
-                ),
-                Positioned(
-                  right: 5,
-                  child: SvgPicture.asset(
-                    AssetsManager.icons.ic_white_arrow_down,
-                    width: 20,
-                  ),
-                ),
-              ],
+                  if (isShowIconDown)
+                    Positioned(
+                      right: 5,
+                      child: SvgPicture.asset(
+                        AssetsManager.icons.ic_white_arrow_down,
+                        width: 20,
+                      ),
+                    ),
+                ],
+              ),
             ),
           ),
         ),
