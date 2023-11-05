@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class AppConstants {
   static String get mochiVersion => "2.0";
   static String get baseApiUrl =>
@@ -7,4 +9,6 @@ class AppConstants {
 
   static double get minTableWidth => 820;
   static double get minDesktopWidth => 1090;
+
+  static final GlobalKey keyOfMaterial = GlobalKey();
 }

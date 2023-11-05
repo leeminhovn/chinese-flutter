@@ -3,13 +3,11 @@ import 'package:MochiChinese/src/components/oragnisms/wrap_page.dart';
 import 'package:MochiChinese/src/modules/home/home.dart';
 import 'package:MochiChinese/src/modules/learn/learn.dart';
 import 'package:MochiChinese/src/modules/notebook/notebook.dart';
+import 'package:MochiChinese/src/modules/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../src/modules/splase/splase.dart';
-
-final GlobalKey<NavigatorState> _shellNavigatorKey =
-    GlobalKey<NavigatorState>();
 
 final GoRouter routerConfig =
     GoRouter(initialLocation: ApplicationRouteName.splash, routes: <RouteBase>[
@@ -17,6 +15,15 @@ final GoRouter routerConfig =
       path: ApplicationRouteName.splash,
       name: ApplicationRouteName.splash,
       builder: (BuildContext context, GoRouterState state) => const Splase()),
+  GoRoute(
+      path: ApplicationRouteName.profile,
+      name: ApplicationRouteName.profile,
+      builder: (BuildContext context, GoRouterState state) {
+        Map argument = state.extra == null ? {} : state.extra as Map;
+        return Profile(
+          redirectFrom: argument["redirectFrom"],
+        );
+      }),
   StatefulShellRoute.indexedStack(
       branches: <StatefulShellBranch>[
         StatefulShellBranch(routes: <RouteBase>[

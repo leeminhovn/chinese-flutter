@@ -69,7 +69,6 @@ class _CardCourse extends State<CardLesson> {
                 color: widget.borderColor,
                 width: 2,
               ),
-              color: Colors.green,
               borderRadius: const BorderRadius.all(Radius.circular(25)),
             ),
             child: Stack(

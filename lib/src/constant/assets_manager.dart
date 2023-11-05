@@ -36,6 +36,9 @@ class IconsManager {
   String get arrowDown => '${_prefix}arrow_down.svg';
   String get cheesy => '${_prefix}cheesy.png';
   String get flash_card_click => '${_prefix}flash_card_click.png';
+
+  String get icon_arrow_left_circle => '${_prefix}icon_arrow_left_circle.svg';
+
   String get ic_correct_status => '${_prefix}ic_correct_status.svg';
   String get ic_incorrect_status => '${_prefix}ic_incorrect_status.svg';
   String get ic_white_arrow_down => '${_prefix}ic_white_arrow_down.svg';

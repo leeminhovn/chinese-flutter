@@ -20,7 +20,7 @@ final List<InfoItemBar> dataBottomSheet = [
 ];
 
 class WrapPage extends StatefulWidget {
-  final StatefulNavigationShell child;
+  final Widget child;
   const WrapPage(this.child, {super.key});
 
   @override
@@ -30,6 +30,16 @@ class WrapPage extends StatefulWidget {
 class _WrapPage extends State<WrapPage> {
   @override
   Widget build(BuildContext context) {
+    _handleOpenProfilePage() {
+      context.go(ApplicationRouteName.profile, extra: {
+        'redirectFrom': GoRouter.of(context)
+            .routerDelegate
+            .currentConfiguration
+            .uri
+            .toString(),
+      });
+    }
+
     // TODO: implement build
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -81,7 +91,8 @@ class _WrapPage extends State<WrapPage> {
                     AssetsManager.images.logo_mochi_chinese,
                     height: 35,
                   ),
-                  const ImageUser()
+                  InkWell(
+                      onTap: _handleOpenProfilePage, child: const ImageUser())
                 ],
               ),
             ),
