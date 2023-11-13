@@ -20,32 +20,11 @@ class Button extends StatefulWidget {
 class _Button extends State<Button> {
   bool isActive = false;
   late StyleButton buttonStyle;
-
-  @override
-  void initState() {
-    setState(() {
-      if (widget.color == "orange") {
-        buttonStyle = StyleButton(
-            topColor: const Color(0xfffdd868),
-            middleColor: const [
-              Color(0xffffc153),
-              Color(0xfffa8c3f),
-            ],
-            footerColor: const Color(0xfff95c08));
-      } else if (widget.color == "green") {
-        buttonStyle = StyleButton(
-            topColor: const Color(0xff25a930),
-            middleColor: const [
-              Color(0xff59f672),
-              Color(0xff4dd563),
-            ],
-            footerColor: const Color(0xff25a930));
-      }
-    });
-    super.initState();
-  }
-
+  _Button() {}
   handleClick(e) {
+    if (widget.color == "silver") {
+      return;
+    }
     setState(() {
       isActive = true;
     });
@@ -60,7 +39,34 @@ class _Button extends State<Button> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    if (widget.color == "orange") {
+      buttonStyle = StyleButton(
+          topColor: const Color(0xfffdd868),
+          middleColor: const [
+            Color(0xffffc153),
+            Color(0xfffa8c3f),
+          ],
+          footerColor: const Color(0xfff95c08));
+    } else if (widget.color == "green") {
+      buttonStyle = StyleButton(
+          topColor: const Color(0xff25a930),
+          middleColor: const [
+            Color(0xff59f672),
+            Color(0xff4dd563),
+          ],
+          footerColor: const Color(0xff25a930));
+    } else if (widget.color == "silver") {
+      buttonStyle = StyleButton(
+          topColor: const Color(0xffefeeed),
+          middleColor: const [
+            Color(0xffe1e1e1),
+            Color.fromRGBO(204, 204, 204, 1),
+          ],
+          footerColor: const Color(0xffb9b9b9));
+    }
+    return InkWell(
+      highlightColor: Colors.transparent,
+      splashColor: Colors.transparent,
       onTapDown: handleClick,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),

@@ -7,9 +7,11 @@ class WrapPopupPage extends StatelessWidget {
   final Widget child;
   final String title;
   final String backPage;
+  final Function? otherActionBack;
   const WrapPopupPage(
       {this.title = "",
-      required this.backPage,
+      this.backPage = "",
+      this.otherActionBack,
       required this.child,
       super.key});
 
@@ -25,10 +27,20 @@ class WrapPopupPage extends StatelessWidget {
           body: WillPopScope(
             onWillPop: () async {
               // Xử lý logic nếu muốn chuyển hướng khi nhấn nút back
+              if (otherActionBack != null) {
+                otherActionBack!();
+                return false;
+              }
+              if (backPage == "") {
+                // context.pop();
+                return true;
+              }
               // Để chuyển hướng đến một trang khác, bạn có thể sử dụng Navigator
-              context.go(backPage);
+              else {
+                context.go(backPage);
+                return false;
+              }
               // Trả về false để ngăn chặn việc thoát khỏi trang hiện tại
-              return false;
             },
             child: Column(
               children: [
@@ -40,7 +52,9 @@ class WrapPopupPage extends StatelessWidget {
                     children: [
                       Align(
                           alignment: Alignment.centerLeft,
-                          child: CircleBackButton(backPage: backPage)),
+                          child: CircleBackButton(
+                              backPage: backPage,
+                              otherActionBack: otherActionBack)),
                       SizedBox(
                         width: double.infinity,
                         child: Center(

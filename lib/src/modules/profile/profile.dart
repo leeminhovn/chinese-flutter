@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 
 class Profile extends StatefulWidget {
   final String redirectFrom;
-  const Profile({required this.redirectFrom, super.key});
+  const Profile({this.redirectFrom = "", super.key});
 
   @override
   State<StatefulWidget> createState() => _Profile();

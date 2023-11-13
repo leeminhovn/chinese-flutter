@@ -1,4 +1,5 @@
 import 'package:MochiChinese/config/router_name.dart';
+import 'package:MochiChinese/src/components/molecules/bottom_sheet/modal_bottom_sheet.dart';
 import 'package:MochiChinese/src/components/oragnisms/card_lesson.dart';
 import 'package:MochiChinese/src/constant/app_constants.dart';
 import 'package:MochiChinese/src/modules/learn/bloc/courses_cubit.dart';
@@ -7,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../components/oragnisms/buttons/button.dart';
+import '../../../constant/assets_manager.dart';
 import '../../../data/dtos/courses/info_lesson_course.dart';
 
 class ListLesson extends StatefulWidget {
@@ -33,7 +36,38 @@ class _ListLesson extends State<ListLesson> {
       countItemRow = 2;
     }
     handleClickOpenLesson() {}
-    handleClickLockLesson() {}
+    handleClickLockLesson() {
+      ModalBottomSheet.showBottomSheet(
+        context: AppConstants.rootKeyRoute.currentContext!,
+        imageTopPath: AssetsManager.mochi.mochi_notice,
+        positionbottomImage: 29.5,
+        widthImage: 250,
+        title:
+            'Create an account to unlock lessons \n and activate the "Golden Time"',
+        children: [
+          Button(
+            "CREATE AN ACCOUNT",
+            height: 60,
+            width: 250,
+            funcClick: () {
+              context.pop();
+              context.push(ApplicationRouteName.signup);
+            },
+          ),
+          Button(
+            "LOG IN",
+            height: 60,
+            color: "green",
+            width: 250,
+            funcClick: () {
+              context.pop();
+              context.push(ApplicationRouteName.login);
+            },
+          )
+        ],
+      );
+    }
+
     handleCLickLearnedLesson() {}
 
     return BlocBuilder<CoursesCubit, CoursesState>(builder: (context, state) {

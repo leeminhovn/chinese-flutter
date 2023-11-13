@@ -33,6 +33,7 @@ class _MyApp extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(fontFamily: "Quicksand"),
           routerConfig: routerConfig,
+
         ));
   }
 }

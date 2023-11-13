@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 
 class CardCourse extends StatefulWidget {
   final CourseDto courseData;
-  const CardCourse({required this.courseData, super.key});
+  final Function funcClick;
+  const CardCourse(
+      {required this.courseData, required this.funcClick, super.key});
 
   @override
   State<StatefulWidget> createState() => _CardCourse();
@@ -21,7 +23,7 @@ class _CardCourse extends State<CardCourse> {
     Future.delayed(const Duration(milliseconds: 200), () {
       setState(() => isActive = false);
       Future.delayed(const Duration(milliseconds: 200), () {
-        // widget.funcClick();
+        widget.funcClick();
       });
     });
   }

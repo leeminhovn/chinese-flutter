@@ -5,7 +5,10 @@ import 'package:MochiChinese/src/modules/learn/bloc/courses_cubit.dart';
 import 'package:MochiChinese/src/modules/learn/widgets/card_course.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../components/molecules/bottom_sheet/modal_bottom_sheet.dart';
+import '../../../components/oragnisms/buttons/button.dart';
 import '../../../components/oragnisms/wrap_popup_page.dart';
 
 class ListCourse extends StatefulWidget {
@@ -42,7 +45,30 @@ class _ListCourse extends State<ListCourse> {
         BlocProvider.of<CoursesCubit>(context).state.listCourse;
     final double screenWidth = MediaQuery.of(context).size.width;
 
-    print(dataCourses);
+    _handleClickCourse(CourseDto course) {
+      if (course.isData) {
+        context.go(ApplicationRouteName.learn);
+      } else {
+        ModalBottomSheet.showBottomSheet(
+          context: context,
+          imageTopPath: AssetsManager.mochi.mochi_ngai_ngung,
+          widthImage: 180,
+          positionbottomImage: 0,
+          title: "Please inbox Mochi for assistance in changing your password",
+          children: [
+            Button(
+              "BACK",
+              height: 60,
+              width: 200,
+              funcClick: () {
+                context.pop();
+              },
+            )
+          ],
+        );
+      }
+    }
+
     return WrapPopupPage(
       title: "COURSE",
       backPage: ApplicationRouteName.learn,
@@ -61,7 +87,9 @@ class _ListCourse extends State<ListCourse> {
             duration: const Duration(milliseconds: 400),
             child: Column(
               children: [
-                ...dataCourses.map((course) => CardCourse(courseData: course))
+                ...dataCourses.map((course) => CardCourse(
+                    courseData: course,
+                    funcClick: () => _handleClickCourse(course)))
               ],
             ),
           ),

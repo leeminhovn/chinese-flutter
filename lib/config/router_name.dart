@@ -8,4 +8,6 @@ class ApplicationRouteName {
   static String get list_course => "/learn/list-course";
   static String get profile => "/profile";
   static String get notebook => "/notebook";
+  static String get login => "/login";
+  static String get signup => "/signup";
 }

@@ -5,7 +5,9 @@ import 'package:go_router/go_router.dart';
 
 class CircleBackButton extends StatefulWidget {
   final String backPage;
-  const CircleBackButton({required this.backPage, super.key});
+  final Function? otherActionBack;
+  const CircleBackButton(
+      {required this.backPage, this.otherActionBack, super.key});
 
   @override
   State<StatefulWidget> createState() => _CircleBackButton();
@@ -21,7 +23,15 @@ class _CircleBackButton extends State<CircleBackButton> {
     Future.delayed(const Duration(milliseconds: 200), () {
       setState(() => isActive = false);
       Future.delayed(const Duration(milliseconds: 200), () {
-        context.go(widget.backPage);
+        if (widget.otherActionBack != null) {
+          widget.otherActionBack!();
+          return true;
+        }
+        if (widget.backPage == "") {
+          context.pop();
+        } else {
+          context.go(widget.backPage);
+        }
       });
     });
   }

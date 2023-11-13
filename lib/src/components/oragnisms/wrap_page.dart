@@ -31,13 +31,9 @@ class _WrapPage extends State<WrapPage> {
   @override
   Widget build(BuildContext context) {
     _handleOpenProfilePage() {
-      context.go(ApplicationRouteName.profile, extra: {
-        'redirectFrom': GoRouter.of(context)
-            .routerDelegate
-            .currentConfiguration
-            .uri
-            .toString(),
-      });
+      context.pushNamed(
+        ApplicationRouteName.profile,
+      );
     }
 
     // TODO: implement build

@@ -43,7 +43,6 @@ class IconsManager {
   String get ic_incorrect_status => '${_prefix}ic_incorrect_status.svg';
   String get ic_white_arrow_down => '${_prefix}ic_white_arrow_down.svg';
   String get icon_target => '${_prefix}icon_target.png';
-
   String get icon_graph => '${_prefix}icon_graph.svg';
   String get icon_gire_clock => '${_prefix}icon_gire_clock.svg';
 
@@ -53,6 +52,9 @@ class IconsManager {
   String get icon_vocab_black => '${_prefix}icon_vocab_black.png';
   String get icon_vocab_tab => '${_prefix}ic_vocab_tab.png';
   String get michi => '${_prefix}michi.png';
+  String get ic_close => '${_prefix}icon_close.svg';
+  String get icon_apple => '${_prefix}icon_apple.png';
+  String get icon_google_plus => '${_prefix}icon_google_plus.png';
   String get speaker_audio => '${_prefix}speaker_audio.png';
   String get wave1 => '${_prefix}wave1.png';
   String get wave2 => '${_prefix}wave2.png';
@@ -73,6 +75,7 @@ class MochiManager {
   String get mochi_submit_fail => '${_prefix}mochi_submit_fail.svg';
   String get mochiSayEnding => '${_prefix}mochiSayEnding.png';
   String get success => '${_prefix}success.png';
+  String get mochi_investigator => '${_prefix}mochi_investigator.jpg';
 }
 
 class AnimationsManager {

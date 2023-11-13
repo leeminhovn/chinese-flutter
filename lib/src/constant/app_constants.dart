@@ -11,4 +11,5 @@ class AppConstants {
   static double get minDesktopWidth => 1090;
 
   static final GlobalKey keyOfMaterial = GlobalKey();
+  static final rootKeyRoute = GlobalKey<NavigatorState>();
 }
