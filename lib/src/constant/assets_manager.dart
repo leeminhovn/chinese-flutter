@@ -45,7 +45,9 @@ class IconsManager {
   String get icon_target => '${_prefix}icon_target.png';
   String get icon_graph => '${_prefix}icon_graph.svg';
   String get icon_gire_clock => '${_prefix}icon_gire_clock.svg';
-
+  String get icon_calendar => '${_prefix}icon_calendar.svg';
+  String get icon_email => '${_prefix}icon_email.svg';
+  String get icon_calendar_x => '${_prefix}icon_calendar_x.svg';
   String get ic_notebook_tab => '${_prefix}ic_notebook_tab.png';
   String get icon_graph_black => '${_prefix}icon_graph_black.png';
   String get icon_notebook_black => '${_prefix}icon_notebook_black.png';

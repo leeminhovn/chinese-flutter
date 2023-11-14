@@ -42,13 +42,17 @@ class _InputCustomAuth extends State<InputCustomAuth> {
                   vertical: 20),
               hintStyle: TextStyle(
                 fontWeight: FontWeight.w600,
-                color: Colors.grey.withOpacity(0.5), // Màu chữ
+                color: widget.errMessage.isNotEmpty
+                    ? const Color(0xffeb5757)
+                    : Colors.grey.withOpacity(0.5), // Màu chữ
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
+                borderSide: BorderSide(
                     width: 1.5,
-                    color: Color(
-                        0xfffb993b)), // Màu border khi TextField được focus
+                    color: widget.errMessage.isNotEmpty
+                        ? const Color(0xffeb5757)
+                        : const Color(
+                            0xfffb993b)), // Màu border khi TextField được focus
                 borderRadius: BorderRadius.circular(
                     15.0), // Radius của border khi TextField được focus
               ),
@@ -89,7 +93,7 @@ class _InputCustomAuth extends State<InputCustomAuth> {
                         ),
                       ),
                     )
-                  : SizedBox()),
+                  : const SizedBox()),
           onChanged: widget.onChanged,
         ),
         if (widget.errMessage.length != 0)
@@ -97,7 +101,7 @@ class _InputCustomAuth extends State<InputCustomAuth> {
               bottom: -23,
               child: Text(
                 widget.errMessage,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w600,
                     color: Color(0xffeb5757)),

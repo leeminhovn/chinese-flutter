@@ -1,10 +1,3 @@
-// khi vừa mới vào page thì ta sẽ lấy ra lesson của khoá học đầu tiên (khoá mặc định)
-//sau đó hiển thị ra cho user
-//về sau thì ta nên call tất cả kháo học, vì hiện tại chỉ có một kháo học được mở
-
-// danh sách khoá học, khi user click mở ra danh sách khoá học, thì sẽ bắt đầu call api lấy danh sách khoá học
-//nếu user click vào khoá học thì thay đổi lại curentCourse
-
 part of 'courses_cubit.dart';
 
 abstract class CoursesState {
@@ -15,6 +8,7 @@ abstract class CoursesState {
   LessonDto? currentLesson;
   List<LessonDto> currentLessons = [];
   CourseDto? currentCourse;
+  bool showPopupLessonAfterLogin = false;
 
   copy(CoursesState state) {
     isLoadingLessons = state.isLoadingLessons;
@@ -23,6 +17,7 @@ abstract class CoursesState {
     currentLessons = state.currentLessons;
     currentLesson = state.currentLesson;
     currentCourse = state.currentCourse;
+    showPopupLessonAfterLogin = state.showPopupLessonAfterLogin;
   }
 }
 

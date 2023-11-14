@@ -1,6 +1,7 @@
 import 'package:MochiChinese/config/router_config.dart';
 import 'package:MochiChinese/src/constant/app_constants.dart';
 import 'package:MochiChinese/src/modules/learn/bloc/courses_cubit.dart';
+import 'package:MochiChinese/src/modules/profile/bloc/user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,20 +21,21 @@ class MyApp extends StatefulWidget {
 class _MyApp extends State<MyApp> {
   @override
   void dispose() {
-    print("dispose main");
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [BlocProvider(create: (ctx) => CoursesCubit())],
+        providers: [
+          BlocProvider(create: (ctx) => CoursesCubit()),
+          BlocProvider(create: (ctx) => UserCubit())
+        ],
         child: MaterialApp.router(
           key: AppConstants.keyOfMaterial,
           debugShowCheckedModeBanner: false,
           theme: ThemeData(fontFamily: "Quicksand"),
           routerConfig: routerConfig,
-
         ));
   }
 }

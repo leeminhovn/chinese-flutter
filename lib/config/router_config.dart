@@ -29,7 +29,7 @@ final GoRouter routerConfig = GoRouter(
           parentNavigatorKey: rootKey,
           builder: (BuildContext context, GoRouterState state) {
             Map argument = state.extra == null ? {} : state.extra as Map;
-            print("okle");
+
             return Profile(
               redirectFrom: argument["redirectFrom"] ?? "",
             );
@@ -76,8 +76,12 @@ final GoRouter routerConfig = GoRouter(
               GoRoute(
                   path: ApplicationRouteName.learn,
                   name: ApplicationRouteName.learn,
-                  builder: (BuildContext context, GoRouterState state) =>
-                      Learn()),
+                  builder: (BuildContext context, GoRouterState state) {
+                    Map argument =
+                        state.extra == null ? {} : state.extra as Map;
+
+                    return Learn(infoPopupShow: argument["popupShow"] ?? "");
+                  }),
             ]),
             StatefulShellBranch(routes: <RouteBase>[
               GoRoute(

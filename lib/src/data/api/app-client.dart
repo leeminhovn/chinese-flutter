@@ -23,9 +23,11 @@ class AppClient {
     return _dio.get(endPoint, queryParameters: queryParameters);
   }
 
-  Future<Response> postDioAuthen(
+  Future<Response> postDio(
       {String endPoint = '', String accessToken = '', dynamic data}) {
-    _dioAuthen.options.headers["Authorization"] = "Bearer $accessToken";
+    if (accessToken != '') {
+      _dioAuthen.options.headers["Authorization"] = "Bearer $accessToken";
+    }
     return _dioAuthen.post(endPoint, data: jsonEncode(data));
   }
 }

@@ -25,9 +25,13 @@ class _ListLesson extends State<ListLesson> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
-
     late int countItemRow = 1;
 
     if (screenWidth > AppConstants.minDesktopWidth) {
@@ -71,6 +75,9 @@ class _ListLesson extends State<ListLesson> {
     handleCLickLearnedLesson() {}
 
     return BlocBuilder<CoursesCubit, CoursesState>(builder: (context, state) {
+      // if (state is ShowPopupLessonAfterLogin) {
+      //   print("zoo");
+      // }
       final String titleCourse =
           state is LessonsLoading ? "" : state.currentCourse!.title;
       return Column(

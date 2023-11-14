@@ -4,7 +4,9 @@ import 'package:MochiChinese/src/components/oragnisms/buttons/button.dart';
 import 'package:MochiChinese/src/components/oragnisms/buttons/button_login_social.dart';
 import 'package:MochiChinese/src/components/oragnisms/wrap_popup_page.dart';
 import 'package:MochiChinese/src/constant/assets_manager.dart';
+import 'package:MochiChinese/src/modules/profile/bloc/user_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../components/molecules/bottom_sheet/modal_bottom_sheet.dart';
@@ -34,6 +36,14 @@ class _LoginState extends State<Login> {
   String errPassword = "";
   String valueEmail = "";
   String valePassword = "";
+
+  bool _handleCheckActive(errEmail, errPassword, valueEmail, valePassword) {
+    return errEmail == "" &&
+        errPassword == "" &&
+        valueEmail != "" &&
+        valePassword != "";
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -42,11 +52,19 @@ class _LoginState extends State<Login> {
       context.push(ApplicationRouteName.signup);
     }
 
-    bool _handleCheckActive() {
-      return errEmail == "" &&
-          errPassword == "" &&
-          valueEmail != "" &&
-          valePassword != "";
+    _handleLogin() async {
+      final Map<String, dynamic>? error = await context
+          .read<UserCubit>()
+          .loginByEmailAction(valueEmail, valePassword);
+      if (error == null) {
+        context.go(ApplicationRouteName.learn,
+            extra: {"popupShow": "popupLearnALessonAfterLogin"});
+      } else {
+        setState(() {
+          errEmail = error["email"];
+          errPassword = error["password"];
+        });
+      }
     }
 
     return WrapPopupPage(
@@ -111,8 +129,11 @@ class _LoginState extends State<Login> {
               ),
               Button("LOG IN",
                   height: 68,
-                  color: _handleCheckActive() ? "orange" : "silver",
-                  funcClick: () {}),
+                  color: _handleCheckActive(
+                          errEmail, errPassword, valueEmail, valePassword)
+                      ? "orange"
+                      : "silver",
+                  funcClick: _handleLogin),
               const SizedBox(
                 height: 15,
               ),
