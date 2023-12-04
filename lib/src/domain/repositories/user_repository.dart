@@ -5,4 +5,10 @@ class UserRepo {
     return UserDataSource()
         .loginByEmail({"email": email, "password": password});
   }
+
+  Future<Map<String, dynamic>> signupByEmail(
+      String name, String email, String password) {
+    return UserDataSource()
+        .signupByEmail({"name": name, "email": email, "password": password});
+  }
 }

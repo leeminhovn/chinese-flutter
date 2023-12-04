@@ -24,7 +24,11 @@ class SuccessLogin extends UserState {
     super.copy(state);
   }
 }
-
+class SuccessRegister extends UserState {
+  SuccessRegister(UserState state) {
+    super.copy(state);
+  }
+}
 class FailLogin extends UserState {
   FailLogin(UserState state) {
     super.copy(state..error);

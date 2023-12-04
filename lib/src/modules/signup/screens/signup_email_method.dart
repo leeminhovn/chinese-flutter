@@ -1,11 +1,16 @@
+import 'package:MochiChinese/src/modules/profile/bloc/user_cubit.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../config/router_name.dart';
 import '../../../components/molecules/inputs/input_custom_auth.dart';
 import '../../../components/oragnisms/buttons/button.dart';
 import '../../../components/oragnisms/wrap_popup_page.dart';
 
 class SignupEmailMethod extends StatefulWidget {
   final Function handleShowToggle;
+
   SignupEmailMethod({required this.handleShowToggle, super.key});
 
   @override
@@ -13,17 +18,17 @@ class SignupEmailMethod extends StatefulWidget {
 }
 
 class _SignupEmailMethodState extends State<SignupEmailMethod> {
-  String valueName ='';
+  String valueName = '';
 
-  String valueEmail ="";
+  String valueEmail = "";
 
-  String valuePassword='';
+  String valuePassword = '';
 
-  String errName='';
+  String errName = '';
 
-  String errEmail='';
+  String errEmail = '';
 
-  String errPassword='';
+  String errPassword = '';
 
   bool isEmailValid(String email) {
     // Sử dụng regex để kiểm tra định dạng email
@@ -35,8 +40,30 @@ class _SignupEmailMethodState extends State<SignupEmailMethod> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    bool isActive (){
-return valueName != '' && valueEmail != '' && valuePassword != '' && errName ==""&& errPassword ==''&& errEmail =='';
+    bool isActive() {
+      return valueName != '' &&
+          valueEmail != '' &&
+          valuePassword != '' &&
+          errName == "" &&
+          errPassword == '' &&
+          errEmail == '';
+    }
+
+    handleRegister() async {
+      final String? err = await BlocProvider.of<UserCubit>(context)
+          .signupByEmailAction(valueEmail, valuePassword, valueName);
+
+      if(err ==null ){
+
+        context.go(ApplicationRouteName.learn,
+            extra: {"popupShow": "popupLearnALessonAfterLogin"});
+      }else {
+        print(err);
+        errEmail = err;
+        setState(() {
+
+        });
+      }
     }
 
     return WrapPopupPage(
@@ -62,12 +89,12 @@ return valueName != '' && valueEmail != '' && valuePassword != '' && errName =="
               isObscureText: false,
               onChanged: (String text) {
                 valueName = text;
-                if(text.length < 6) {
+                if (text.length < 6) {
                   errName = "*Must have a minimum of 6 characters";
-                } else {errName ="";}
-                setState(() {
-
-                });
+                } else {
+                  errName = "";
+                }
+                setState(() {});
               },
               errMessage: errName,
             ),
@@ -78,15 +105,12 @@ return valueName != '' && valueEmail != '' && valuePassword != '' && errName =="
               hintText: "Enter your account email",
               isObscureText: false,
               onChanged: (String text) {
-                valueEmail= text;
-                errEmail =(!isEmailValid(text))?"*Incorrect format email": "";
-                setState(() {
-
-                });
+                valueEmail = text;
+                errEmail =
+                    (!isEmailValid(text)) ? "*Incorrect format email" : "";
+                setState(() {});
               },
               errMessage: errEmail,
-
-
             ),
             const SizedBox(
               height: 30,
@@ -97,22 +121,23 @@ return valueName != '' && valueEmail != '' && valuePassword != '' && errName =="
               onChanged: (String text) {
                 valuePassword = text;
                 print(text.length);
-                if(text.length < 6) {
+                if (text.length < 6) {
                   errPassword = "*Must have a minimum of 6 characters";
                 } else {
-                  errPassword ="";
+                  errPassword = "";
                 }
-                setState(() {
-
-                });
+                setState(() {});
               },
               errMessage: errPassword,
-
             ),
             const SizedBox(
               height: 30,
             ),
-            Button("CREATE ACCOUNT", color: isActive()? "orange": "silver", height: 68, funcClick: () {}),
+            Button("CREATE ACCOUNT",
+                color: isActive() ? "orange" : "silver",
+                height: 68, funcClick: () {
+              handleRegister();
+            }),
           ],
         ),
       ),

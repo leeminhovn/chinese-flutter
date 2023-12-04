@@ -19,4 +19,17 @@ class UserDataSource extends BaseDataSource {
       return {"data": null, "error": err.response!.data["message"]};
     }
   }
+
+  Future<Map<String, dynamic>> signupByEmail(Map<String, dynamic> data) async {
+    try {
+      Response response =
+          await appClient.postDio(endPoint: Endpoint.userRegister, data: data);
+      print(response);
+        UserDto dataConvert = UserDto.fromJson(response.data["data"]["user"]);
+        return {"data": dataConvert, "error": ""};
+
+    } on DioException catch (err) {
+      return {"data": null, "error": err.response!.data["message"]};
+    }
+  }
 }

@@ -34,4 +34,28 @@ class UserCubit extends Cubit<UserState> {
       return {"email": errEmail, "password": errPass};
     }
   }
+
+  Future<String?> signupByEmailAction(
+      String email, String password, String name) async {
+    final Map<String, dynamic> infoUser =
+        await UserRepo().signupByEmail(name, email, password);
+  print(infoUser["error"]);
+    if (infoUser["error"] == "") {
+      emit(SuccessRegister(state)..user = infoUser["data"]);
+
+      return null;
+    } else {
+      String errEmail = "";
+
+      if (infoUser["error"].contains("tồn tại")) {
+
+        errEmail = "*No account exists for this email";
+
+      } else {
+        errEmail = "*Error something to login";
+      }
+
+      return errEmail;
+    }
+  }
 }

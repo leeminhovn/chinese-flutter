@@ -46,7 +46,31 @@ class _Learn extends State<Learn> {
                   ],
                 )
               });
-    }
+    } else if (widget.infoPopupShow == "popupLearnALessonAfterRegister") {
+      if (widget.infoPopupShow == "popupLearnALessonAfterLogin") {
+        Future.delayed(
+            const Duration(milliseconds: 300),
+                () => {
+              ModalBottomSheet.showBottomSheet(
+                context: AppConstants.rootKeyRoute.currentContext!,
+                imageTopPath: AssetsManager.mochi.success,
+                widthImage: 180,
+                positionbottomImage: -2,
+                title:
+                "You have successfully created an account and unlocked all trial lessons",
+                children: [
+                  Button(
+                    "LEARN A LESSON",
+                    height: 60,
+                    width: 200,
+                    funcClick: () {
+                      context.pop();
+                    },
+                  )
+                ],
+              )
+            });
+    }}
 
     super.didUpdateWidget(oldWidget);
     // Mã này sẽ được thực hiện mỗi khi widget cha tái tạo widget con.
@@ -57,3 +81,5 @@ class _Learn extends State<Learn> {
     return const ListLesson();
   }
 }
+
+
