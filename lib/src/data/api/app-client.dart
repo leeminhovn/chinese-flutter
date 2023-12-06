@@ -9,8 +9,8 @@ class AppClient {
 
   final BaseOptions _baseOptions = BaseOptions(
     baseUrl: AppConstants.baseApiUrl,
-    connectTimeout: const Duration(seconds: 20),
-    receiveTimeout: const Duration(seconds: 20),
+    connectTimeout: const Duration(seconds: 50),
+    receiveTimeout: const Duration(seconds: 50),
     contentType: 'application/json',
     headers: {"api-key": AppConstants.API_KEY},
   );

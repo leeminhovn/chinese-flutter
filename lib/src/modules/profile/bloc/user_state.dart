@@ -3,9 +3,10 @@ part of 'user_cubit.dart';
 abstract class UserState {
   UserDto? user;
   Map<String, dynamic> error = {};
-
+bool isOutDateExpired = true;
   copy(UserState state) {
     user = state.user;
+    isOutDateExpired = state.isOutDateExpired;
   }
 }
 

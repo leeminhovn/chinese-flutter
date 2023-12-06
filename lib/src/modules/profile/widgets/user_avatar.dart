@@ -4,14 +4,27 @@ import 'package:flutter/material.dart';
 class UserAvatar extends StatelessWidget {
   final int type;
 
-  // type 0: guest, 1: freee, 2: paid
-  const UserAvatar({required this.type, super.key});
+  // type 0: guest, 1: free, 2: paid
+  const UserAvatar({ this.type = 0, super.key});
+
 
   @override
   Widget build(BuildContext context) {
     Color borderColor = Color(0xffcbcbcb);
     List<Color> cardColors = [Color(0xffe5e5e5), Color(0xffcbcbcb)];
+    String text = "Guest account";
 
+    switch(type) {
+      case 1: {
+         borderColor = Color(0xff3ec654);
+        cardColors = [Color(0xff53de69), Color(0xff3ec654)];
+        break;
+      }case 2: {
+      borderColor = Color(0xfffb993b);
+    cardColors = [Color(0xffffcb08), Color(0xfffdb033)];
+        break;
+    }
+    }
     const double sizeAvatar = 192;
 
     return Stack(
@@ -38,7 +51,7 @@ class UserAvatar extends StatelessWidget {
               ),
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Text(
-                "Guest account",
+                text,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                     color: Colors.white,

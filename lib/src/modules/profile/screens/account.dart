@@ -1,6 +1,7 @@
 import 'package:MochiChinese/src/constant/assets_manager.dart';
 import 'package:MochiChinese/src/modules/profile/bloc/user_cubit.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../widgets/user_avatar.dart';
@@ -12,6 +13,9 @@ class Account extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    int type=0;
+
+    print(BlocProvider.of<UserCubit>(context).state.isOutDateExpired);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [

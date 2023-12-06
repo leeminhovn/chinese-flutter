@@ -9,7 +9,23 @@ class UserCubit extends Cubit<UserState> {
   UserCubit() : super(UserStateInitial()) {
     getInfoUser();
   }
+  bool checkExpired (String? expired) {
+    if (expired == null) {
+      return true;
+    }
+    List<String> arrayDate = expired.split("-") ;
+    int year = arrayDate[0] as int;
+    int month = arrayDate[1] as int;
+    int day = arrayDate[2] as int;
+    DateTime dateNeedCheck = DateTime(year, month, day);
+    DateTime dateNow = DateTime.now();
+    if ( dateNow.isAfter(dateNeedCheck)) {
+      return false;
+    }
+    return
+         true;
 
+  }
   void getInfoUser() async {}
 
   Future<Map<String, dynamic>?> loginByEmailAction(
@@ -18,7 +34,9 @@ class UserCubit extends Cubit<UserState> {
         await UserRepo().loginByEmail(email, password);
 
     if (infoUser["error"] == "") {
-      emit(SuccessLogin(state)..user = infoUser["data"]);
+      final bool isOutDateExpired = checkExpired((infoUser["data"] as UserDto).expired_day);
+
+      emit(SuccessLogin(state)..user = infoUser["data"] ..isOutDateExpired = isOutDateExpired);
 
       return null;
     } else {
