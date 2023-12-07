@@ -1,5 +1,5 @@
-import 'package:MochiChinese/src/modules/signup/screens/signup_email_method.dart';
-import 'package:MochiChinese/src/modules/signup/screens/signup_social_method.dart';
+import 'package:MochiChinese/src/modules/auth/signup/screens/signup_email_method.dart';
+import 'package:MochiChinese/src/modules/auth/signup/screens/signup_social_method.dart';
 import 'package:flutter/material.dart';
 
 class Signup extends StatefulWidget {

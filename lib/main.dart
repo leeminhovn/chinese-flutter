@@ -1,13 +1,16 @@
 import 'package:MochiChinese/config/router_config.dart';
-import 'package:MochiChinese/src/constant/app_constants.dart';
+import 'package:MochiChinese/core/constant/app_constants.dart';
 import 'package:MochiChinese/src/modules/learn/bloc/courses_cubit.dart';
 import 'package:MochiChinese/src/modules/profile/bloc/user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  final appDocumentDirectory = await getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDirectory.path);
   runApp(const MyApp());
 }
 

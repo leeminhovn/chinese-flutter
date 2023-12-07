@@ -1,4 +1,4 @@
-import 'package:MochiChinese/src/constant/user_enum.dart';
+import 'package:MochiChinese/core/constant/user_enum.dart';
 import 'package:MochiChinese/src/domain/repositories/user_repository.dart';
 import 'package:MochiChinese/src/domain/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +10,17 @@ part 'user_state.dart';
 class UserCubit extends Cubit<UserState> {
   UserCubit() : super(UserStateInitial()) {
     getInfoUser();
+  }
+  void handleConvertTimeUser(
+      UserDto dataUser, AccountSubscriptionStatus accountSubscriptionStatus) {
+    dataUser.createdAt =
+        DateTimeHelp.convertIsoTimeFormatToAsiaTimeFormat(dataUser.createdAt);
+
+    if (accountSubscriptionStatus == AccountSubscriptionStatus.premiumAccount) {
+      dataUser.expired_day =
+          DateTimeHelp.convertEuropeTimeFormatToAsiaTimeFormat(
+              dataUser.expired_day!);
+    }
   }
 
   void getInfoUser() async {}
@@ -27,15 +38,7 @@ class UserCubit extends Cubit<UserState> {
               ? AccountSubscriptionStatus.freeAccount
               : DateTimeHelp.checkExpired(dataUser.expired_day!);
 
-      dataUser.createdAt =
-          DateTimeHelp.convertIsoTimeFormatToAsiaTimeFormat(dataUser.createdAt);
-
-      if (accountSubscriptionStatus ==
-          AccountSubscriptionStatus.premiumAccount) {
-        dataUser.expired_day =
-            DateTimeHelp.convertEuropeTimeFormatToAsiaTimeFormat(
-                dataUser.expired_day!);
-      }
+      handleConvertTimeUser(dataUser, accountSubscriptionStatus);
 
       emit(SuccessLogin(state)
         ..user = dataUser
@@ -78,5 +81,8 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  Future<void> userLogout() async {}
+  Future<void> logoutUser() async {
+    final Map<String, dynamic> dataLogout = await UserRepo().logoutUser("");
+    // emit();
+  }
 }

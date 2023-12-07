@@ -38,3 +38,9 @@ class FailLogin extends UserState {
     super.copy(state..error);
   }
 }
+
+class UserLogout extends UserState {
+  UserLogout(UserState state) {
+    super.copy(state);
+  }
+}

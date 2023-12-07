@@ -11,4 +11,8 @@ class UserRepo {
     return UserDataSource()
         .signupByEmail({"name": name, "email": email, "password": password});
   }
+
+  Future<Map<String, dynamic>> logoutUser(String accessToken) {
+    return UserDataSource().logoutUser(accessToken);
+  }
 }

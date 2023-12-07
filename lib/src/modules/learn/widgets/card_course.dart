@@ -1,4 +1,4 @@
-import 'package:MochiChinese/src/constant/assets_manager.dart';
+import 'package:MochiChinese/core/constant/assets_manager.dart';
 import 'package:MochiChinese/src/data/dtos/courses/course.dart';
 import 'package:MochiChinese/src/modules/learn/widgets/list_lesson_top_title.dart';
 import 'package:flutter/material.dart';

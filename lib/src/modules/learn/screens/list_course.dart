@@ -1,5 +1,5 @@
 import 'package:MochiChinese/config/router_name.dart';
-import 'package:MochiChinese/src/constant/assets_manager.dart';
+import 'package:MochiChinese/core/constant/assets_manager.dart';
 import 'package:MochiChinese/src/data/dtos/courses/course.dart';
 import 'package:MochiChinese/src/modules/learn/bloc/courses_cubit.dart';
 import 'package:MochiChinese/src/modules/learn/widgets/card_course.dart';

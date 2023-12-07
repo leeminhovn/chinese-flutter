@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:MochiChinese/src/constant/app_constants.dart';
+import 'package:MochiChinese/core/constant/app_constants.dart';
 import 'package:dio/dio.dart';
 
 class AppClient {

@@ -9,7 +9,7 @@ class UserDataSource extends BaseDataSource {
     try {
       Response response =
           await appClient.postDio(endPoint: Endpoint.userLogin, data: data);
-      print(response);
+
       if ((response.data["status"]) == 200) {
         UserDto dataConvert = UserDto.fromJson(response.data["data"]["user"]);
         return {"data": dataConvert, "error": ""};
@@ -24,10 +24,19 @@ class UserDataSource extends BaseDataSource {
     try {
       Response response =
           await appClient.postDio(endPoint: Endpoint.userRegister, data: data);
-      print(response);
-        UserDto dataConvert = UserDto.fromJson(response.data["data"]["user"]);
-        return {"data": dataConvert, "error": ""};
+      UserDto dataConvert = UserDto.fromJson(response.data["data"]["user"]);
+      return {"data": dataConvert, "error": ""};
+    } on DioException catch (err) {
+      return {"data": null, "error": err.response!.data["message"]};
+    }
+  }
 
+  Future<Map<String, dynamic>> logoutUser(String accessToken) async {
+    try {
+      Response response = await appClient.postDio(
+          endPoint: Endpoint.userLogout, accessToken: accessToken);
+
+      return {"status": "success logout", "error": ""};
     } on DioException catch (err) {
       return {"data": null, "error": err.response!.data["message"]};
     }

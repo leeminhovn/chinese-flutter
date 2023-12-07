@@ -1,11 +1,11 @@
-import 'package:MochiChinese/src/constant/app_constants.dart';
+import 'package:MochiChinese/core/constant/app_constants.dart';
+import 'package:MochiChinese/core/constant/assets_manager.dart';
 import 'package:MochiChinese/src/modules/learn/screens/list_lesson.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../components/molecules/bottom_sheet/modal_bottom_sheet.dart';
 import '../../components/oragnisms/buttons/button.dart';
-import '../../constant/assets_manager.dart';
 
 class Learn extends StatefulWidget {
   final String infoPopupShow;
@@ -50,27 +50,28 @@ class _Learn extends State<Learn> {
       if (widget.infoPopupShow == "popupLearnALessonAfterLogin") {
         Future.delayed(
             const Duration(milliseconds: 300),
-                () => {
-              ModalBottomSheet.showBottomSheet(
-                context: AppConstants.rootKeyRoute.currentContext!,
-                imageTopPath: AssetsManager.mochi.success,
-                widthImage: 180,
-                positionbottomImage: -2,
-                title:
-                "You have successfully created an account and unlocked all trial lessons",
-                children: [
-                  Button(
-                    "LEARN A LESSON",
-                    height: 60,
-                    width: 200,
-                    funcClick: () {
-                      context.pop();
-                    },
+            () => {
+                  ModalBottomSheet.showBottomSheet(
+                    context: AppConstants.rootKeyRoute.currentContext!,
+                    imageTopPath: AssetsManager.mochi.success,
+                    widthImage: 180,
+                    positionbottomImage: -2,
+                    title:
+                        "You have successfully created an account and unlocked all trial lessons",
+                    children: [
+                      Button(
+                        "LEARN A LESSON",
+                        height: 60,
+                        width: 200,
+                        funcClick: () {
+                          context.pop();
+                        },
+                      )
+                    ],
                   )
-                ],
-              )
-            });
-    }}
+                });
+      }
+    }
 
     super.didUpdateWidget(oldWidget);
     // Mã này sẽ được thực hiện mỗi khi widget cha tái tạo widget con.
@@ -81,5 +82,3 @@ class _Learn extends State<Learn> {
     return const ListLesson();
   }
 }
-
-

@@ -1,10 +1,10 @@
 import 'package:MochiChinese/config/router_name.dart';
+import 'package:MochiChinese/core/constant/assets_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../components/oragnisms/mochi_version.dart';
-import '../../constant/assets_manager.dart';
 
 class Splase extends StatefulWidget {
   const Splase({super.key});

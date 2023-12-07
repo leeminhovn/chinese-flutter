@@ -1,12 +1,11 @@
+import 'package:MochiChinese/config/router_name.dart';
+import 'package:MochiChinese/src/components/molecules/inputs/input_custom_auth.dart';
+import 'package:MochiChinese/src/components/oragnisms/buttons/button.dart';
+import 'package:MochiChinese/src/components/oragnisms/wrap_popup_page.dart';
 import 'package:MochiChinese/src/modules/profile/bloc/user_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../../../config/router_name.dart';
-import '../../../components/molecules/inputs/input_custom_auth.dart';
-import '../../../components/oragnisms/buttons/button.dart';
-import '../../../components/oragnisms/wrap_popup_page.dart';
 
 class SignupEmailMethod extends StatefulWidget {
   final Function handleShowToggle;
@@ -53,16 +52,13 @@ class _SignupEmailMethodState extends State<SignupEmailMethod> {
       final String? err = await BlocProvider.of<UserCubit>(context)
           .signupByEmailAction(valueEmail, valuePassword, valueName);
 
-      if(err ==null ){
-
+      if (err == null) {
         context.go(ApplicationRouteName.learn,
             extra: {"popupShow": "popupLearnALessonAfterLogin"});
-      }else {
+      } else {
         print(err);
         errEmail = err;
-        setState(() {
-
-        });
+        setState(() {});
       }
     }
 

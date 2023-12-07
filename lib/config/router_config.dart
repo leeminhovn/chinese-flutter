@@ -1,16 +1,16 @@
 import 'package:MochiChinese/config/router_name.dart';
+import 'package:MochiChinese/core/constant/app_constants.dart';
 import 'package:MochiChinese/src/components/oragnisms/wrap_page.dart';
-import 'package:MochiChinese/src/constant/app_constants.dart';
+import 'package:MochiChinese/src/modules/auth/login/login.dart';
+import 'package:MochiChinese/src/modules/auth/signup/signup.dart';
 import 'package:MochiChinese/src/modules/home/home.dart';
 import 'package:MochiChinese/src/modules/learn/learn.dart';
 import 'package:MochiChinese/src/modules/learn/screens/list_course.dart';
-import 'package:MochiChinese/src/modules/login/login.dart';
 import 'package:MochiChinese/src/modules/notebook/notebook.dart';
 import 'package:MochiChinese/src/modules/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../src/modules/signup/signup.dart';
 import '../src/modules/splase/splase.dart';
 
 final rootKey = AppConstants.rootKeyRoute;

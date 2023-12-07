@@ -1,6 +1,5 @@
+import 'package:MochiChinese/core/constant/assets_manager.dart';
 import 'package:flutter/material.dart';
-
-import '../../constant/assets_manager.dart';
 
 class CardLesson extends StatefulWidget {
   final String title;

@@ -1,4 +1,4 @@
-import 'package:MochiChinese/src/constant/assets_manager.dart';
+import 'package:MochiChinese/core/constant/assets_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

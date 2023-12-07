@@ -1,9 +1,9 @@
 import 'package:MochiChinese/config/router_name.dart';
+import 'package:MochiChinese/core/constant/assets_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../components/oragnisms/buttons/button.dart';
-import '../../../constant/assets_manager.dart';
 
 class ScreenNotHaveWordLearn extends StatelessWidget {
   const ScreenNotHaveWordLearn({super.key});

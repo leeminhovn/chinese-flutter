@@ -1,5 +1,5 @@
 import 'package:MochiChinese/config/router_name.dart';
-import 'package:MochiChinese/src/constant/assets_manager.dart';
+import 'package:MochiChinese/core/constant/assets_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';

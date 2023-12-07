@@ -1,11 +1,10 @@
+import 'package:MochiChinese/config/router_name.dart';
+import 'package:MochiChinese/core/constant/assets_manager.dart';
+import 'package:MochiChinese/src/components/oragnisms/buttons/button.dart';
+import 'package:MochiChinese/src/components/oragnisms/buttons/button_login_social.dart';
+import 'package:MochiChinese/src/components/oragnisms/wrap_popup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../../../config/router_name.dart';
-import '../../../components/oragnisms/buttons/button.dart';
-import '../../../components/oragnisms/buttons/button_login_social.dart';
-import '../../../components/oragnisms/wrap_popup_page.dart';
-import '../../../constant/assets_manager.dart';
 
 class SignupSocialMethod extends StatelessWidget {
   final String backPage;

@@ -1,4 +1,4 @@
-import 'package:MochiChinese/src/constant/learn_constants.dart';
+import 'package:MochiChinese/core/constant/learn_constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/dtos/courses/course.dart';

@@ -1,5 +1,5 @@
-import 'package:MochiChinese/src/constant/assets_manager.dart';
-import 'package:MochiChinese/src/constant/user_enum.dart';
+import 'package:MochiChinese/core/constant/assets_manager.dart';
+import 'package:MochiChinese/core/constant/user_enum.dart';
 import 'package:MochiChinese/src/modules/profile/bloc/user_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +51,7 @@ class Account extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             InkWell(
-              onTap: () => {},
+              onTap: () => {BlocProvider.of<UserCubit>(context).logoutUser()},
               child: const Text(
                 'Log out',
                 style: TextStyle(
@@ -61,7 +61,7 @@ class Account extends StatelessWidget {
                     decoration: TextDecoration.underline),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             )
           ],

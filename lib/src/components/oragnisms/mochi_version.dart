@@ -1,4 +1,4 @@
-import 'package:MochiChinese/src/constant/app_constants.dart';
+import 'package:MochiChinese/core/constant/app_constants.dart';
 import 'package:flutter/cupertino.dart';
 
 class MochiVersion extends StatelessWidget {

@@ -1,10 +1,8 @@
 import 'package:MochiChinese/config/router_name.dart';
+import 'package:MochiChinese/core/constant/user_enum.dart';
 import 'package:MochiChinese/src/components/oragnisms/buttons/button.dart';
-import 'package:MochiChinese/src/constant/user_enum.dart';
-import 'package:MochiChinese/src/modules/profile/bloc/user_cubit.dart';
 import 'package:MochiChinese/src/modules/profile/widgets/user_avatar.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class NotLogin extends StatelessWidget {

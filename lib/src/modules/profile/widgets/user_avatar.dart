@@ -1,5 +1,5 @@
-import 'package:MochiChinese/src/constant/assets_manager.dart';
-import 'package:MochiChinese/src/constant/user_enum.dart';
+import 'package:MochiChinese/core/constant/assets_manager.dart';
+import 'package:MochiChinese/core/constant/user_enum.dart';
 import 'package:MochiChinese/src/modules/profile/bloc/user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
