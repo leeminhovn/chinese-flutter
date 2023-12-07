@@ -8,9 +8,9 @@ class UserDto {
   final String id;
   final String name;
   final String email;
-  final String? expired_day;
+  String? expired_day;
   final String avatar;
-  final String createdAt;
+  String createdAt;
   UserDto(this.id, this.name, this.email, this.expired_day, this.avatar,
       this.createdAt);
   factory UserDto.fromJson(Map<String, dynamic> json) {

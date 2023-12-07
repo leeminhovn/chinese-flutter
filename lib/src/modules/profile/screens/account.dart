@@ -1,6 +1,8 @@
 import 'package:MochiChinese/src/constant/assets_manager.dart';
+import 'package:MochiChinese/src/constant/user_enum.dart';
 import 'package:MochiChinese/src/modules/profile/bloc/user_cubit.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -13,34 +15,57 @@ class Account extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    int type=0;
+    AccountSubscriptionStatus accountSubscriptionStatus =
+        BlocProvider.of<UserCubit>(context).state.accountSubscriptionStatus;
 
-    print(BlocProvider.of<UserCubit>(context).state.isOutDateExpired);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        UserAvatar(type: 0),
-        SizedBox(
+        UserAvatar(accountSubscriptionStatus: accountSubscriptionStatus),
+        const SizedBox(
           height: 20,
         ),
         Text(
           dataState.user!.name,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
-        SizedBox(
+        const SizedBox(
           height: 30,
         ),
         _rowInfo(
             AssetsManager.icons.icon_email, "Email: ", dataState.user!.email),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         _rowInfo(AssetsManager.icons.icon_calendar, "Activation date: ",
             dataState.user!.createdAt),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
-        Expanded(child: Text('123'))
+        if (accountSubscriptionStatus ==
+            AccountSubscriptionStatus.premiumAccount)
+          _rowInfo(AssetsManager.icons.icon_calendar_x, "Expiration date: ",
+              dataState.user!.expired_day!),
+        Expanded(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            InkWell(
+              onTap: () => {},
+              child: const Text(
+                'Log out',
+                style: TextStyle(
+                    color: Color(0xffbdbdbd),
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20,
+                    decoration: TextDecoration.underline),
+              ),
+            ),
+            SizedBox(
+              height: 40,
+            )
+          ],
+        ))
       ],
     );
   }
@@ -50,16 +75,16 @@ class Account extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SvgPicture.asset(icon),
-        SizedBox(
+        const SizedBox(
           width: 5,
         ),
         Text(
           label,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         Text(
           content,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
         )
       ],
     );

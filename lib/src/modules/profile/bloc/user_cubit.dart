@@ -1,4 +1,6 @@
+import 'package:MochiChinese/src/constant/user_enum.dart';
 import 'package:MochiChinese/src/domain/repositories/user_repository.dart';
+import 'package:MochiChinese/src/domain/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/dtos/user/user.dart';
@@ -9,23 +11,7 @@ class UserCubit extends Cubit<UserState> {
   UserCubit() : super(UserStateInitial()) {
     getInfoUser();
   }
-  bool checkExpired (String? expired) {
-    if (expired == null) {
-      return true;
-    }
-    List<String> arrayDate = expired.split("-") ;
-    int year = arrayDate[0] as int;
-    int month = arrayDate[1] as int;
-    int day = arrayDate[2] as int;
-    DateTime dateNeedCheck = DateTime(year, month, day);
-    DateTime dateNow = DateTime.now();
-    if ( dateNow.isAfter(dateNeedCheck)) {
-      return false;
-    }
-    return
-         true;
 
-  }
   void getInfoUser() async {}
 
   Future<Map<String, dynamic>?> loginByEmailAction(
@@ -34,9 +20,26 @@ class UserCubit extends Cubit<UserState> {
         await UserRepo().loginByEmail(email, password);
 
     if (infoUser["error"] == "") {
-      final bool isOutDateExpired = checkExpired((infoUser["data"] as UserDto).expired_day);
+      final dataUser = infoUser["data"] as UserDto;
 
-      emit(SuccessLogin(state)..user = infoUser["data"] ..isOutDateExpired = isOutDateExpired);
+      final AccountSubscriptionStatus accountSubscriptionStatus =
+          dataUser.expired_day == null
+              ? AccountSubscriptionStatus.freeAccount
+              : DateTimeHelp.checkExpired(dataUser.expired_day!);
+
+      dataUser.createdAt =
+          DateTimeHelp.convertIsoTimeFormatToAsiaTimeFormat(dataUser.createdAt);
+
+      if (accountSubscriptionStatus ==
+          AccountSubscriptionStatus.premiumAccount) {
+        dataUser.expired_day =
+            DateTimeHelp.convertEuropeTimeFormatToAsiaTimeFormat(
+                dataUser.expired_day!);
+      }
+
+      emit(SuccessLogin(state)
+        ..user = dataUser
+        ..accountSubscriptionStatus = accountSubscriptionStatus);
 
       return null;
     } else {
@@ -57,7 +60,7 @@ class UserCubit extends Cubit<UserState> {
       String email, String password, String name) async {
     final Map<String, dynamic> infoUser =
         await UserRepo().signupByEmail(name, email, password);
-  print(infoUser["error"]);
+
     if (infoUser["error"] == "") {
       emit(SuccessRegister(state)..user = infoUser["data"]);
 
@@ -66,9 +69,7 @@ class UserCubit extends Cubit<UserState> {
       String errEmail = "";
 
       if (infoUser["error"].contains("tồn tại")) {
-
         errEmail = "*No account exists for this email";
-
       } else {
         errEmail = "*Error something to login";
       }
@@ -76,4 +77,6 @@ class UserCubit extends Cubit<UserState> {
       return errEmail;
     }
   }
+
+  Future<void> userLogout() async {}
 }

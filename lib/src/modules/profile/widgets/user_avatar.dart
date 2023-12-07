@@ -1,29 +1,40 @@
 import 'package:MochiChinese/src/constant/assets_manager.dart';
+import 'package:MochiChinese/src/constant/user_enum.dart';
+import 'package:MochiChinese/src/modules/profile/bloc/user_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserAvatar extends StatelessWidget {
-  final int type;
-
+  final AccountSubscriptionStatus accountSubscriptionStatus;
   // type 0: guest, 1: free, 2: paid
-  const UserAvatar({ this.type = 0, super.key});
-
+  const UserAvatar({required this.accountSubscriptionStatus, super.key});
 
   @override
   Widget build(BuildContext context) {
     Color borderColor = Color(0xffcbcbcb);
     List<Color> cardColors = [Color(0xffe5e5e5), Color(0xffcbcbcb)];
-    String text = "Guest account";
+    print(BlocProvider.of<UserCubit>(context).state.accountSubscriptionStatus);
+    String accountStatusString = "Guest account";
 
-    switch(type) {
-      case 1: {
-         borderColor = Color(0xff3ec654);
-        cardColors = [Color(0xff53de69), Color(0xff3ec654)];
+    switch (accountSubscriptionStatus) {
+      case AccountSubscriptionStatus.freeAccount:
+        {
+          borderColor = Color(0xff3ec654);
+          cardColors = [Color(0xff53de69), Color(0xff3ec654)];
+          accountStatusString = "Free account";
+
+          break;
+        }
+      case AccountSubscriptionStatus.premiumAccount:
+        {
+          borderColor = Color(0xfffb993b);
+          cardColors = [Color(0xffffcb08), Color(0xfffdb033)];
+          accountStatusString = "Premium account";
+
+          break;
+        }
+      case AccountSubscriptionStatus.guestAccount:
         break;
-      }case 2: {
-      borderColor = Color(0xfffb993b);
-    cardColors = [Color(0xffffcb08), Color(0xfffdb033)];
-        break;
-    }
     }
     const double sizeAvatar = 192;
 
@@ -51,7 +62,7 @@ class UserAvatar extends StatelessWidget {
               ),
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Text(
-                text,
+                accountStatusString,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                     color: Colors.white,
