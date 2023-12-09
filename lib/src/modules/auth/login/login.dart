@@ -35,6 +35,7 @@ class _LoginState extends State<Login> {
   String errPassword = "";
   String valueEmail = "";
   String valePassword = "";
+  FocusNode _focusNodeInputPassword = FocusNode();
 
   bool _handleCheckActive(errEmail, errPassword, valueEmail, valePassword) {
     return errEmail == "" &&
@@ -94,6 +95,12 @@ class _LoginState extends State<Login> {
               InputCustomAuth(
                 hintText: "Enter your account email",
                 isObscureText: false,
+                focusNodeAuthInput: _focusNodeInputPassword,
+                onSubmitted: (value) {
+                  // Khi người dùng nhấn Enter, chuyển focus sang ô input thứ hai
+
+                  FocusScope.of(context).requestFocus(_focusNodeInputPassword);
+                },
                 errMessage: errEmail,
                 onChanged: (value) {
                   if (!isEmailValid(value)) {

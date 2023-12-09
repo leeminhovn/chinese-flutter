@@ -15,6 +15,12 @@ class UserStateInitial extends UserState {
   UserStateInitial();
 }
 
+class LoadingGetProfileUser extends UserState {
+  LoadingGetProfileUser(UserState state) {
+    super.copy(state);
+  }
+}
+
 class DoneGetInfoUserProfile extends UserState {
   DoneGetInfoUserProfile(UserState state) {
     super.copy(state);

@@ -21,7 +21,6 @@ class _ButtonLoginSocialState extends State<ButtonLoginSocial> {
   bool isActive = false;
 
   handleClick(e) {
-    print("ee");
     setState(() {
       isActive = true;
     });

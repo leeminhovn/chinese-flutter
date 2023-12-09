@@ -10,13 +10,16 @@ import 'package:go_router/go_router.dart';
 class SignupEmailMethod extends StatefulWidget {
   final Function handleShowToggle;
 
-  SignupEmailMethod({required this.handleShowToggle, super.key});
+  const SignupEmailMethod({required this.handleShowToggle, super.key});
 
   @override
   State<SignupEmailMethod> createState() => _SignupEmailMethodState();
 }
 
 class _SignupEmailMethodState extends State<SignupEmailMethod> {
+  FocusNode _focusNodeInputEmail = FocusNode();
+  FocusNode _focusNodeInputPassword = FocusNode();
+
   String valueName = '';
 
   String valueEmail = "";
@@ -93,11 +96,17 @@ class _SignupEmailMethodState extends State<SignupEmailMethod> {
                 setState(() {});
               },
               errMessage: errName,
+              onSubmitted: (value) {
+                // Khi người dùng nhấn Enter, chuyển focus sang ô input thứ hai
+
+                FocusScope.of(context).requestFocus(_focusNodeInputEmail);
+              },
             ),
             const SizedBox(
               height: 30,
             ),
             InputCustomAuth(
+              focusNodeAuthInput: _focusNodeInputEmail,
               hintText: "Enter your account email",
               isObscureText: false,
               onChanged: (String text) {
@@ -107,16 +116,24 @@ class _SignupEmailMethodState extends State<SignupEmailMethod> {
                 setState(() {});
               },
               errMessage: errEmail,
+              onSubmitted: (value) {
+                // Khi người dùng nhấn Enter, chuyển focus sang ô input thứ hai
+
+                FocusScope.of(context).requestFocus(_focusNodeInputPassword);
+              },
             ),
             const SizedBox(
               height: 30,
             ),
             InputCustomAuth(
+              focusNodeAuthInput: _focusNodeInputPassword,
               hintText: "Enter your password",
               isObscureText: false,
+              onSubmitted: (value) => {
+                if (isActive()) {handleRegister()}
+              },
               onChanged: (String text) {
                 valuePassword = text;
-                print(text.length);
                 if (text.length < 6) {
                   errPassword = "*Must have a minimum of 6 characters";
                 } else {

@@ -13,6 +13,9 @@ UserDto _$UserDtoFromJson(Map<String, dynamic> json) => UserDto(
       json['expired_day'] as String?,
       json['avatar'] as String,
       json['createdAt'] as String,
+      json['tokens'] == null
+          ? null
+          : TokensDto.fromJson(json['tokens'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserDtoToJson(UserDto instance) => <String, dynamic>{
@@ -22,6 +25,7 @@ Map<String, dynamic> _$UserDtoToJson(UserDto instance) => <String, dynamic>{
       'expired_day': instance.expired_day,
       'avatar': instance.avatar,
       'createdAt': instance.createdAt,
+      'tokens': instance.tokens,
     };
 
 TokensDto _$TokensDtoFromJson(Map<String, dynamic> json) => TokensDto(

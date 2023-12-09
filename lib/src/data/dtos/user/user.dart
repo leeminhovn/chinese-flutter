@@ -11,8 +11,9 @@ class UserDto {
   String? expired_day;
   final String avatar;
   String createdAt;
+  TokensDto? tokens;
   UserDto(this.id, this.name, this.email, this.expired_day, this.avatar,
-      this.createdAt);
+      this.createdAt, this.tokens);
   factory UserDto.fromJson(Map<String, dynamic> json) {
     return _$UserDtoFromJson(json);
   }

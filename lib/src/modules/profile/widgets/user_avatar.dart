@@ -13,7 +13,6 @@ class UserAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     Color borderColor = Color(0xffcbcbcb);
     List<Color> cardColors = [Color(0xffe5e5e5), Color(0xffcbcbcb)];
-    print(BlocProvider.of<UserCubit>(context).state.accountSubscriptionStatus);
     String accountStatusString = "Guest account";
 
     switch (accountSubscriptionStatus) {

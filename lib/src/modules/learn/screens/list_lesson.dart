@@ -76,7 +76,6 @@ class _ListLesson extends State<ListLesson> {
 
     return BlocBuilder<CoursesCubit, CoursesState>(builder: (context, state) {
       // if (state is ShowPopupLessonAfterLogin) {
-      //   print("zoo");
       // }
       final String titleCourse =
           state is LessonsLoading ? "" : state.currentCourse!.title;

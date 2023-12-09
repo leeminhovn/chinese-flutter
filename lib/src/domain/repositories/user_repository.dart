@@ -12,6 +12,10 @@ class UserRepo {
         .signupByEmail({"name": name, "email": email, "password": password});
   }
 
+  Future<Map<String, dynamic>> getUserInfo(String accessToken) async {
+    return UserDataSource().getUserInfo(accessToken);
+  }
+
   Future<Map<String, dynamic>> logoutUser(String accessToken) {
     return UserDataSource().logoutUser(accessToken);
   }

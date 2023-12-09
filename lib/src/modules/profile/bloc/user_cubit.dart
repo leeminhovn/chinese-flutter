@@ -1,7 +1,11 @@
+import 'package:MochiChinese/config/hive_box_name.dart';
+import 'package:MochiChinese/config/hive_key_data_name.dart';
 import 'package:MochiChinese/core/constant/user_enum.dart';
+import 'package:MochiChinese/model/hive/userInfo/userInfo.dart';
 import 'package:MochiChinese/src/domain/repositories/user_repository.dart';
 import 'package:MochiChinese/src/domain/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 
 import '../../../data/dtos/user/user.dart';
 
@@ -9,8 +13,9 @@ part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
   UserCubit() : super(UserStateInitial()) {
-    getInfoUser();
+    getInfoUserFromLocalToken();
   }
+
   void handleConvertTimeUser(
       UserDto dataUser, AccountSubscriptionStatus accountSubscriptionStatus) {
     dataUser.createdAt =
@@ -23,7 +28,70 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  void getInfoUser() async {}
+  AccountSubscriptionStatus handleCheckDateExpiredUser(UserDto dataUser) {
+    final AccountSubscriptionStatus accountSubscriptionStatus =
+        dataUser.expired_day == null
+            ? AccountSubscriptionStatus.freeAccount
+            : DateTimeHelp.checkExpired(dataUser.expired_day!);
+    handleConvertTimeUser(dataUser, accountSubscriptionStatus);
+
+    return accountSubscriptionStatus;
+  }
+
+  void handleSaveUserInfoInLocal(UserDto data) async {
+    final String accessToken = data.tokens!.accessToken;
+    final Box authBox = await Hive.openBox(HiveBoxName().authBox);
+    final Box<UserInfo> userInfoBox =
+        await Hive.openBox<UserInfo>(HiveBoxName().userInfoBox);
+    // userInfoBox.put("userInfo", userInfoBox.);
+    userInfoBox.put(
+        HiveKeyDataName().userInfo,
+        UserInfo(
+            email: data.email,
+            createdAt: data.createdAt,
+            name: data.name,
+            expired_day: data.expired_day));
+
+    authBox.put(HiveKeyDataName().accessToken, accessToken);
+    authBox.close();
+    userInfoBox.close();
+  }
+
+  void handleRemoveTokenUserInLocal() {
+    var box = Hive.box(HiveBoxName().authBox);
+
+    box.delete('accessToken');
+  }
+
+  void getInfoUserFromLocalToken() async {
+    emit(LoadingGetProfileUser(state));
+
+    final Box authBox = await Hive.openBox(HiveBoxName().authBox);
+    final String accessToken = authBox.get("accessToken", defaultValue: "");
+    final Box<UserInfo> userInfoBox =
+        await Hive.openBox<UserInfo>(HiveKeyDataName().userInfo);
+
+    print("========>");
+    print(accessToken);
+    print("=======>");
+    print(userInfoBox.get(HiveKeyDataName().userInfo));
+
+    if (accessToken != "") {
+      final Map<String, dynamic> userInfo =
+          await UserRepo().getUserInfo(accessToken);
+      if (userInfo["error"] == "") {
+        final UserDto dataUser = userInfo["data"];
+        AccountSubscriptionStatus accountSubscriptionStatus =
+            handleCheckDateExpiredUser(dataUser);
+
+        handleSaveUserInfoInLocal(dataUser);
+
+        emit(SuccessLogin(state)
+          ..user = dataUser
+          ..accountSubscriptionStatus = accountSubscriptionStatus);
+      }
+    }
+  }
 
   Future<Map<String, dynamic>?> loginByEmailAction(
       String email, String password) async {
@@ -31,14 +99,12 @@ class UserCubit extends Cubit<UserState> {
         await UserRepo().loginByEmail(email, password);
 
     if (infoUser["error"] == "") {
-      final dataUser = infoUser["data"] as UserDto;
+      final UserDto dataUser = infoUser["data"];
 
-      final AccountSubscriptionStatus accountSubscriptionStatus =
-          dataUser.expired_day == null
-              ? AccountSubscriptionStatus.freeAccount
-              : DateTimeHelp.checkExpired(dataUser.expired_day!);
+      AccountSubscriptionStatus accountSubscriptionStatus =
+          handleCheckDateExpiredUser(dataUser);
 
-      handleConvertTimeUser(dataUser, accountSubscriptionStatus);
+      handleSaveUserInfoInLocal(dataUser);
 
       emit(SuccessLogin(state)
         ..user = dataUser
@@ -65,7 +131,16 @@ class UserCubit extends Cubit<UserState> {
         await UserRepo().signupByEmail(name, email, password);
 
     if (infoUser["error"] == "") {
-      emit(SuccessRegister(state)..user = infoUser["data"]);
+      final UserDto dataUser = infoUser["data"];
+
+      AccountSubscriptionStatus accountSubscriptionStatus =
+          handleCheckDateExpiredUser(dataUser);
+
+      handleSaveUserInfoInLocal(dataUser);
+
+      emit(SuccessRegister(state)
+        ..user = infoUser["data"]
+        ..accountSubscriptionStatus = accountSubscriptionStatus);
 
       return null;
     } else {
@@ -82,7 +157,8 @@ class UserCubit extends Cubit<UserState> {
   }
 
   Future<void> logoutUser() async {
-    final Map<String, dynamic> dataLogout = await UserRepo().logoutUser("");
-    // emit();
+    final Map<String, dynamic> dataLogout =
+        await UserRepo().logoutUser(state.user!.tokens!.accessToken);
+    emit(UserStateInitial());
   }
 }

@@ -57,7 +57,6 @@ final GoRouter routerConfig = GoRouter(
           parentNavigatorKey: rootKey,
           builder: (BuildContext context, GoRouterState state) {
             Map argument = state.extra == null ? {} : state.extra as Map;
-            print(argument["redirectFrom"] ?? "");
 
             return Signup(
               backPage: argument["redirectFrom"] ?? "",

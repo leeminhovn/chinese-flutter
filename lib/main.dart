@@ -4,13 +4,16 @@ import 'package:MochiChinese/src/modules/learn/bloc/courses_cubit.dart';
 import 'package:MochiChinese/src/modules/profile/bloc/user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:path_provider/path_provider.dart';
+
+import 'model/hive/userInfo/userInfo.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final appDocumentDirectory = await getApplicationDocumentsDirectory();
-  Hive.init(appDocumentDirectory.path);
+  Hive.registerAdapter(UserInfoAdapter());
+  await Hive.initFlutter();
+  // Hive.init(appDocumentDirectory.path);
   runApp(const MyApp());
 }
 
@@ -24,6 +27,7 @@ class MyApp extends StatefulWidget {
 class _MyApp extends State<MyApp> {
   @override
   void dispose() {
+    Hive.close();
     super.dispose();
   }
 
@@ -32,7 +36,7 @@ class _MyApp extends State<MyApp> {
     return MultiBlocProvider(
         providers: [
           BlocProvider(create: (ctx) => CoursesCubit()),
-          BlocProvider(create: (ctx) => UserCubit())
+          BlocProvider(lazy: false, create: (ctx) => UserCubit())
         ],
         child: MaterialApp.router(
           key: AppConstants.keyOfMaterial,

@@ -4,11 +4,16 @@ class InputCustomAuth extends StatefulWidget {
   final String hintText;
   final bool isObscureText;
   final String errMessage;
+  final FocusNode? focusNodeAuthInput;
   final Function(String text) onChanged;
+  final Function(String text)? onSubmitted;
+
   const InputCustomAuth(
       {this.hintText = "",
       required this.onChanged,
       this.isObscureText = false,
+      this.focusNodeAuthInput,
+      this.onSubmitted,
       this.errMessage = "",
       super.key});
 
@@ -32,7 +37,9 @@ class _InputCustomAuth extends State<InputCustomAuth> {
       clipBehavior: Clip.none,
       children: [
         TextField(
+          focusNode: widget.focusNodeAuthInput,
           obscureText: isObscureText,
+          onSubmitted: widget.onSubmitted ?? (value) => {},
           style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
           decoration: InputDecoration(
               hintText: widget.hintText,

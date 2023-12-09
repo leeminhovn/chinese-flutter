@@ -12,6 +12,8 @@ class UserDataSource extends BaseDataSource {
 
       if ((response.data["status"]) == 200) {
         UserDto dataConvert = UserDto.fromJson(response.data["data"]["user"]);
+        dataConvert.tokens =
+            TokensDto.fromJson(response.data["data"]["tokens"]);
         return {"data": dataConvert, "error": ""};
       }
       return {"data": null, "error": "status not is 200"};
@@ -25,6 +27,20 @@ class UserDataSource extends BaseDataSource {
       Response response =
           await appClient.postDio(endPoint: Endpoint.userRegister, data: data);
       UserDto dataConvert = UserDto.fromJson(response.data["data"]["user"]);
+      dataConvert.tokens = TokensDto.fromJson(response.data["data"]["tokens"]);
+      return {"data": dataConvert, "error": ""};
+    } on DioException catch (err) {
+      return {"data": null, "error": err.response!.data["message"]};
+    }
+  }
+
+  Future<Map<String, dynamic>> getUserInfo(String accessToken) async {
+    try {
+      Response response = await appClient.postDio(
+          endPoint: Endpoint.getUserInfo, accessToken: accessToken);
+      UserDto dataConvert = UserDto.fromJson(response.data["data"]["user"]);
+      dataConvert.tokens = TokensDto.fromJson(response.data["data"]["tokens"]);
+      print(response);
       return {"data": dataConvert, "error": ""};
     } on DioException catch (err) {
       return {"data": null, "error": err.response!.data["message"]};
@@ -35,7 +51,7 @@ class UserDataSource extends BaseDataSource {
     try {
       Response response = await appClient.postDio(
           endPoint: Endpoint.userLogout, accessToken: accessToken);
-
+      print(response);
       return {"status": "success logout", "error": ""};
     } on DioException catch (err) {
       return {"data": null, "error": err.response!.data["message"]};
