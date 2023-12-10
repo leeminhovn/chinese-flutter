@@ -40,10 +40,15 @@ class UserCubit extends Cubit<UserState> {
 
   void handleSaveUserInfoInLocal(UserDto data) async {
     final String accessToken = data.tokens!.accessToken;
-    final Box authBox = await Hive.openBox(HiveBoxName().authBox);
-    final Box<UserInfo> userInfoBox =
-        await Hive.openBox<UserInfo>(HiveBoxName().userInfoBox);
+    final List<Box> boxOpens = await Future.wait([
+      Hive.openBox(HiveBoxName().authBox),
+      Hive.openBox<UserInfo>(HiveBoxName().userInfoBox)
+    ]);
+    final Box authBox = boxOpens[0];
+    final Box userInfoBox = boxOpens[1];
+
     // userInfoBox.put("userInfo", userInfoBox.);
+
     userInfoBox.put(
         HiveKeyDataName().userInfo,
         UserInfo(
@@ -69,12 +74,7 @@ class UserCubit extends Cubit<UserState> {
     final Box authBox = await Hive.openBox(HiveBoxName().authBox);
     final String accessToken = authBox.get("accessToken", defaultValue: "");
     final Box<UserInfo> userInfoBox =
-        await Hive.openBox<UserInfo>(HiveKeyDataName().userInfo);
-
-    print("========>");
-    print(accessToken);
-    print("=======>");
-    print(userInfoBox.get(HiveKeyDataName().userInfo));
+        await Hive.openBox<UserInfo>(HiveBoxName().userInfoBox);
 
     if (accessToken != "") {
       final Map<String, dynamic> userInfo =
